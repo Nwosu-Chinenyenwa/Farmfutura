@@ -62,6 +62,7 @@ export default function page() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [mo, setmo] = useState(false);
 
   const previousSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
