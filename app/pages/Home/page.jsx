@@ -34,10 +34,23 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function page() {
   const [showside, setshowside] = useState(false);
-  const [hamburga, sethamburga] = useState(true);
+  const [hamburga, sethamburga] = useState(false);
   const [mode, setmode] = useState(false);
 
   let hamtoggle = () => sethamburga(!hamburga);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const Scroll = () => {
+      if (window.scrollY > 20) {
+        setshowside(false);
+      }
+    };
+
+    window.addEventListener("scroll", Scroll);
+
+    return () => window.removeEventListener("scroll", Scroll);
+  }, []);
 
   let images = [
     {
@@ -143,7 +156,7 @@ export default function page() {
               Buy Now
             </button>
 
-            <header>
+            <header className="mb-10 lg:mb-0">
               <nav className=" hidden lg:flex items-center justify-between text-white nav-border">
                 <div className="p-5  border px-20">
                   <Image src={logo} alt="logo" />
@@ -250,24 +263,62 @@ export default function page() {
                 </ul>
               </nav>
 
-              <section className="flex lg:hidden flex-col relative">
-                <nav className="flex  w-[100vw] bg-white justify-between items-center p-3">
+              <section className="flex z-30 lg:hidden flex-col relative">
+                <nav className="flex z-10 fixed px-5 w-[100vw] bg-white justify-between items-center p-3">
                   <Image src={logo} alt="logo" />
 
-                  <svg
-                    onClick={hamtoggle}
-                    className="w-8 cursor-pointer z-30"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M12 3C10.9 3 10 3.9 10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3ZM12 17C10.9 17 10 17.9 10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"></path>
-                  </svg>
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="w-5 list-none relative text-[#333333] hover:text-white cursor-pointer transition"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z"></path>
+                    </svg>
+                    <div>
+                      <li className="list-none relative  p-2 text-[#333333] cursor-pointer transition">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="w-5"
+                        >
+                          <path d="M4.00436 6.41686L0.761719 3.17422L2.17593 1.76001L5.41857 5.00265H20.6603C21.2126 5.00265 21.6603 5.45037 21.6603 6.00265C21.6603 6.09997 21.6461 6.19678 21.6182 6.29L19.2182 14.29C19.0913 14.713 18.7019 15.0027 18.2603 15.0027H6.00436V17.0027H17.0044V19.0027H5.00436C4.45207 19.0027 4.00436 18.5549 4.00436 18.0027V6.41686ZM5.50436 23.0027C4.67593 23.0027 4.00436 22.3311 4.00436 21.5027C4.00436 20.6742 4.67593 20.0027 5.50436 20.0027C6.33279 20.0027 7.00436 20.6742 7.00436 21.5027C7.00436 22.3311 6.33279 23.0027 5.50436 23.0027ZM17.5044 23.0027C16.6759 23.0027 16.0044 22.3311 16.0044 21.5027C16.0044 20.6742 16.6759 20.0027 17.5044 20.0027C18.3328 20.0027 19.0044 20.6742 19.0044 21.5027C19.0044 22.3311 18.3328 23.0027 17.5044 23.0027Z"></path>
+                        </svg>
+
+                        <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[#82b440] rounded-full">
+                          0
+                        </span>
+                      </li>
+                    </div>
+                    {hamburga ? (
+                      <svg
+                        onClick={() => sethamburga(!hamburga)}
+                        className="w-7"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path>
+                      </svg>
+                    ) : (
+                      <svg
+                        className="w-5"
+                        onClick={() => sethamburga(true)}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+                      </svg>
+                    )}
+                  </div>
                 </nav>
                 {hamburga && (
-                  <section className="fixed z-20  justify-center flex items-center ">
-                    <div className="justify-center  w-[100vw] h-[60vh] flex items-center shadow-sm">
-                      <ul className=" w-[90vw] bg-white h-[40vh] overflow-y-scroll relative bottom-3">
+                  <section className="  justify-center relative flex items-center ">
+                    <div className="justify-center fixed  w-[100vw] bg-[#00000087] h-[200vh]  flex items-center shadow-sm">
+                      <ul className=" w-[90vw] bg-white h-[40vh] relative top-60 overflow-y-scroll  bottom-3">
                         <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                           <p className="text-[#82b440]">Home</p>
                           <svg
@@ -475,9 +526,7 @@ export default function page() {
                     </span>
                   </div>
 
-                  <h1
-                    className="text-white lg:text-[55px] text-[26px] font-bold"
-                  >
+                  <h1 className="text-white lg:text-[55px] text-[26px] font-bold">
                     Vegetable and fruits are Good for Health
                   </h1>
                   <p className="text-white">
@@ -632,10 +681,18 @@ export default function page() {
               <p className="text-[#209e2e] lg:text-[15px] font-[400] text-[14px]">
                 CULTIVATION AREA
               </p>
-              <h3 className={`${mode ? "text-white" : "text-[#333333]"} lg:text-[36px] text-[26px] font-bold`}>
+              <h3
+                className={`${
+                  mode ? "text-white" : "text-[#333333]"
+                } lg:text-[36px] text-[26px] font-bold`}
+              >
                 We are triple areas of farm
               </h3>
-              <p className={`${mode ? "text-white" : "text-[#7a7e9a]"} "text-[16px] font-[400] leading-[1.8] lg:max-w-[605px] m-auto`}>
+              <p
+                className={`${
+                  mode ? "text-white" : "text-[#7a7e9a]"
+                } "text-[16px] font-[400] leading-[1.8] lg:max-w-[605px] m-auto`}
+              >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut laboreonsectetur adipiscinet
                 dolore.
@@ -643,7 +700,11 @@ export default function page() {
             </span>
 
             <div className="flex flex-wrap justify-center items-center lg:gap-10 gap-5 mt-[30px] lg:mt-[50px]">
-              <div className={`${mode ? "bg-[#0e0e0e] text-white" : "bg-[#d2ecd4]"} lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10`}>
+              <div
+                className={`${
+                  mode ? "bg-[#0e0e0e] text-white" : "bg-[#d2ecd4]"
+                } lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10`}
+              >
                 <span>
                   <p className={`${mo}text-[#209e2e] text-[14px]`}>
                     {" "}
