@@ -29,11 +29,13 @@ import about3 from "../../../public/img/about3.png";
 import rag1 from "../../../public/img/shape-2 (1).png";
 import about from "../../../public/img/aboutM.jpg";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function page() {
   const [showside, setshowside] = useState(false);
-  const [hamburga, sethamburga] = useState(false);
+  const [hamburga, sethamburga] = useState(true);
+  const [mode, setmode] = useState(false);
 
   let hamtoggle = () => sethamburga(!hamburga);
 
@@ -91,7 +93,7 @@ export default function page() {
 
   return (
     <>
-      <section>
+      <section className={`${mode ? "bg-[#000000] text-white" : ""}`}>
         <section className="relative nav-hero">
           <div className="bg-[#000000d6]">
             <Image
@@ -125,7 +127,12 @@ export default function page() {
             <div className="w-35 fixed left-1 top-125 lg:top-120 z-30">
               <div className="checkbox-wrapper-5">
                 <div className="check">
-                  <input id="check-5" type="checkbox" defaultChecked />
+                  <input
+                    id="check-5"
+                    type="checkbox"
+                    checked={mode}
+                    onChange={(e) => setmode(e.target.checked)}
+                  />
                   <label htmlFor="check-5"></label>
                 </div>
               </div>
@@ -467,7 +474,9 @@ export default function page() {
                     </span>
                   </div>
 
-                  <h1 className="lg:text-[55px] text-[26px] text-white font-bold">
+                  <h1
+                    className="text-white lg:text-[55px] text-[26px] font-bold"
+                  >
                     Vegetable and fruits are Good for Health
                   </h1>
                   <p className="text-white">
@@ -622,10 +631,10 @@ export default function page() {
               <p className="text-[#209e2e] lg:text-[15px] font-[400] text-[14px]">
                 CULTIVATION AREA
               </p>
-              <h3 className="lg:text-[36px] text-[26px] font-bold text-[#333333]">
+              <h3 className={`${mode ? "text-white" : "text-[#333333]"} lg:text-[36px] text-[26px] font-bold`}>
                 We are triple areas of farm
               </h3>
-              <p className="text-[16px] font-[400] text-[#7a7e9a] leading-[1.8] lg:max-w-[605px] m-auto">
+              <p className={`${mode ? "text-white" : "text-[#7a7e9a]"} "text-[16px] font-[400] leading-[1.8] lg:max-w-[605px] m-auto`}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut laboreonsectetur adipiscinet
                 dolore.
@@ -633,9 +642,9 @@ export default function page() {
             </span>
 
             <div className="flex flex-wrap justify-center items-center lg:gap-10 gap-5 mt-[30px] lg:mt-[50px]">
-              <div className="bg-[#d2ecd4] lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10">
+              <div className={`${mode ? "bg-[#0e0e0e] text-white" : "bg-[#d2ecd4]"} lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10`}>
                 <span>
-                  <p className="text-[#209e2e] text-[14px]">
+                  <p className={`${mo}text-[#209e2e] text-[14px]`}>
                     {" "}
                     Authentic Vegetable
                   </p>
@@ -713,44 +722,6 @@ export default function page() {
         </section>
 
         <section className="bg-[#f4faf4]">
-          {/*   <div
-    className="relative w-full h-[400px] overflow-hidden"
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
-  >
-    {images.map((item, i) => (
-      <div
-        key={i}
-        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-          i === currentIndex ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <Image
-          src={item.img}
-          alt={item.alt}
-          fill
-          className="object-cover"
-          priority={i === 0}
-        />
-      </div>
-    ))}
-
-    <button
-      aria-label="Previous slide"
-      onClick={previousSlide}
-      className="absolute left-3 top-1/2 -translate-y-1/2"
-    >
-      <ChevronLeft />
-    </button>
-
-    <button
-      aria-label="Next slide"
-      onClick={nextSlide}
-      className="absolute right-3 top-1/2 -translate-y-1/2"
-    >
-      <ChevronRight />
-    </button>
-  </div> */}
           <Image src={rag1} alt="rag1" />
 
           <div>
@@ -774,92 +745,77 @@ export default function page() {
               </span>
             </div>
 
-            {/* <div className="relative w-full max-w-4xl mx-auto h-[450px] overflow-hidden">
-                  {images.map((item, i) => (
-                    <div
-                      key={i}
-                      className={` inset-0 transition-opacity duration-700 ease-in-out ${
-                        i === currentIndex ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      <div className="relative">
-                        <Image
-                          src={item.img}
-                          alt={item.alt}
-                          fill
-                          className="object-cover rounded-t-lg"
-                          priority={i === 0}
-                        />
-                      </div>
-
-                      <div className="bg-white rounded-b-lg p-4 border">
-                        <p className="text-green-600 font-medium flex items-center gap-2">
-                          ● {item.title}
-                        </p>
-                        <p className="font-semibold mt-2">{item.text}</p>
-                      </div>
-                    </div>
-                  ))}
-
-                  <button
-                    aria-label="Previous slide"
-                    onClick={previousSlide}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-green-500 text-white p-2 rounded-full"
-                  >
-                    <ChevronLeft />
-                  </button>
-
-                  <button
-                    aria-label="Next slide"
-                    onClick={nextSlide}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-green-500 text-white p-2 rounded-full"
-                  >
-                    <ChevronRight />
-                  </button>
-                </div> */}
             <div className="flex">
               <Image className="w-[40vw] h-auto" src={about} alt="seller" />
 
               <div>
                 <div>
-                  <div>
-                    <div>
-                      {images.map((item, i) => (
-                        <div
-                          key={i}
-                          className={` inset-0 transition-opacity duration-700 ease-in-out ${
-                            i === currentIndex ? "opacity-100" : "opacity-0"
-                          }`}
-                        >
-                          <div className="relative  w-[300px] h-[300px]">
-                            <Image
-                              src={item.img}
-                              alt={item.alt}
-                              fill
-                              className="object-cover rounded-lg"
-                              priority={i === 0}
-                            />
-                          </div>
-
-                          <div>
-                            <p>● {item.title}</p>
-                            <p>{item.text}</p>
+                  <Swiper
+                    spaceBetween={50}
+                    slidesPerView={3}
+                    onSlideChange={() => console.log("slide change")}
+                    onSwiper={(swiper) => console.log(swiper)}
+                  >
+                    <div className="flex">
+                      <SwiperSlide>
+                        <div>
+                          <Image
+                            className="w-[20vw] h-auto relative top-2"
+                            src={about1}
+                            alt="seller"
+                          />
+                          <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                            <li className="flex gap-2 items-center">
+                              <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                              <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                                Pure agro services
+                              </p>
+                            </li>
+                            <h3 className="text-[#333333] font-[800]">
+                              Rich in nutrients but no formal or defect
+                            </h3>
                           </div>
                         </div>
-                      ))}
-
-                      <button
-                        aria-label="Previous slide"
-                        onClick={previousSlide}
-                      >
-                        <ChevronLeft />
-                      </button>
-
-                      <button aria-label="Next slide" onClick={nextSlide}>
-                        <ChevronRight />
-                      </button>
+                        <div>
+                          <Image
+                            className="w-[20vw] h-auto relative top-2"
+                            src={about2}
+                            alt="seller"
+                          />
+                          <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                            <li className="flex gap-2 items-center">
+                              <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                              <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                                Pure agro services
+                              </p>
+                            </li>
+                            <h3 className="text-[#333333] font-[800]">
+                              Rich in nutrients but no formal or defect
+                            </h3>
+                          </div>
+                        </div>
+                        <div>
+                          <Image
+                            className="w-[20vw] h-auto relative top-2"
+                            src={about3}
+                            alt="seller"
+                          />
+                          <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                            <li className="flex gap-2 items-center">
+                              <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                              <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                                Pure agro services
+                              </p>
+                            </li>
+                            <h3 className="text-[#333333] font-[800]">
+                              Rich in nutrients but no formal or defect
+                            </h3>
+                          </div>
+                        </div>
+                      </SwiperSlide>
                     </div>
-                  </div>
+                  </Swiper>
+
                   <h3 className="text-[#333333] text-[25px] font-bold">
                     Life is not like a species do you believe?
                   </h3>
