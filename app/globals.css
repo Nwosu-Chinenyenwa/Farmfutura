@@ -309,3 +309,31 @@ animation-duration: 5s;
   font-size: calc(.6 * var(--size));
   line-height: 0;
 }
+
+.fun-facts-content-area {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+
+.slideMenu{
+  animation: 1s slidemenu ;
+}
+
+@keyframes slidemenu{
+  from{
+   transform: translateY(-100px);
+  }
+  to{
+    transform: translateY(0px);
+  }
+}

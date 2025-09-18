@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import Nav from "@/app/Components/Nav";
 import gsap from "gsap";
 import _ScrollTrigger from "gsap/ScrollTrigger";
@@ -35,15 +35,18 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function page() {
   const [showside, setshowside] = useState(false);
   const [hamburga, sethamburga] = useState(false);
+  const [displayNav, setdisplayNav] = useState(false);
   const [mode, setmode] = useState(false);
 
-  let hamtoggle = () => sethamburga(!hamburga);
+  let hamtoggle = useCallback(() => {
+    sethamburga((prev) => !prev);
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const Scroll = () => {
       if (window.scrollY > 20) {
-        setshowside(false);
+        sethamburga(false);
       }
     };
 
@@ -51,7 +54,7 @@ export default function page() {
 
     return () => window.removeEventListener("scroll", Scroll);
   }, []);
-
+  /* 
   let images = [
     {
       img: about1,
@@ -103,15 +106,58 @@ export default function page() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  if (!images.length) return null;
+  if (!images.length) return null; */
 
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let index = 0;
+    const items = scrollContainer.children;
+    const itemWidth = items[0]?.offsetWidth + 12;
+
+    const interval = setInterval(() => {
+      index++;
+      if (index >= items.length) index = 0;
+
+      scrollContainer.scrollTo({
+        left: index * itemWidth,
+        behavior: "smooth",
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const Scroll = () => {
+      if (window.scrollY > 100) {
+        setdisplayNav(true);
+      } else {
+        setdisplayNav(false);
+      }
+    };
+
+    window.addEventListener("scroll", Scroll);
+
+    return () => window.removeEventListener("scroll", Scroll);
+  }, []);
   return (
     <>
-      <section className={`${mode ? "bg-[#000000] text-white" : ""}`}>
+      <section>
+        {displayNav ? (
+          <div className="hidden lg:block">
+            <Nav />
+          </div>
+        ) : (
+          ""
+        )}
         <section className="relative nav-hero">
           <div className="bg-[#000000d6]">
             <Image
-              className="w-20 leave absolute hidden z-10 lg:block"
+              className="w-20 leave absolute hidden lg:block"
               src={shape2}
               alt="shape2"
             />
@@ -121,7 +167,7 @@ export default function page() {
               alt="shape1"
             />
 
-            <div className="fixed bottom-5 right-5 z-20">
+            <div className="fixed bottom-5 right-5 z-10">
               <li className="lg:hidden bg-[#209e2e] list-none text-white p-2 border-1 rounded-[10px] border-[#209e2e] hover:text-white cursor-pointer transition">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +184,7 @@ export default function page() {
               </li>
             </div>
 
-            <div className="w-35 fixed left-1 top-125 lg:top-120 z-30">
+            <div className="w-35 fixed left-1 top-125 lg:top-120 z-10">
               <div className="checkbox-wrapper-5">
                 <div className="check">
                   <input
@@ -263,13 +309,13 @@ export default function page() {
                 </ul>
               </nav>
 
-              <section className="flex z-30 lg:hidden flex-col relative">
+              <section className="flex z-10 lg:hidden flex-col relative">
                 <nav className="flex z-10 fixed px-5 w-[100vw] bg-white justify-between items-center p-3">
                   <Image src={logo} alt="logo" />
 
                   <div className="flex items-center gap-2">
                     <svg
-                      className="w-5 list-none relative text-[#333333] hover:text-white cursor-pointer transition"
+                      className="w-5 list-none relative text-[#333333]  cursor-pointer transition"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -294,7 +340,7 @@ export default function page() {
                     </div>
                     {hamburga ? (
                       <svg
-                        onClick={() => sethamburga(!hamburga)}
+                        onClick={hamtoggle}
                         className="w-7"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -305,7 +351,7 @@ export default function page() {
                     ) : (
                       <svg
                         className="w-5"
-                        onClick={() => sethamburga(true)}
+                        onClick={hamtoggle}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
@@ -318,7 +364,7 @@ export default function page() {
                 {hamburga && (
                   <section className="  justify-center relative flex items-center ">
                     <div className="justify-center fixed  w-[100vw] bg-[#00000087] h-[200vh]  flex items-center shadow-sm">
-                      <ul className=" w-[90vw] bg-white h-[40vh] relative top-60 overflow-y-scroll  bottom-3">
+                      <ul className=" w-[90vw] bg-white slideMenu h-[40vh] relative top-60 overflow-y-scroll  bottom-3">
                         <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                           <p className="text-[#82b440]">Home</p>
                           <svg
@@ -671,7 +717,7 @@ export default function page() {
           </section>
         )}
 
-        <section className="relative bottom-3 lg:bottom-6 z-0">
+        <section className="relative bottom-3 lg:bottom-6">
           <Image src={rag} alt="shape2" />
         </section>
 
@@ -706,7 +752,7 @@ export default function page() {
                 } lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10`}
               >
                 <span>
-                  <p className={`${mo}text-[#209e2e] text-[14px]`}>
+                  <p className={`${mode}text-[#209e2e] text-[14px]`}>
                     {" "}
                     Authentic Vegetable
                   </p>
@@ -786,167 +832,254 @@ export default function page() {
         <section className="bg-[#f4faf4]">
           <Image src={rag1} alt="rag1" />
 
-          <div>
-            <div className="flex items-center w-[90vw] m-auto my-[60px]">
-              <span className="w-[60vw]">
-                <span className="text-[#209e2e] text-[15px] block mb-[8px]">
-                  KNOW ABOUT US
+          <div className="pb-10">
+            <div>
+              <div className="flex items-center w-[80vw] m-auto my-[60px]">
+                <span className="w-[60vw]">
+                  <span className="text-[#209e2e] text-[15px] block mb-[8px]">
+                    KNOW ABOUT US
+                  </span>
+                  <h2 className="text-[38px] font-[700] text-[#333333]">
+                    The territory might be safe is vegetable easy to get
+                  </h2>
                 </span>
-                <h2 className="text-[38px] font-[700] text-[#333333]">
-                  The territory might be safe is vegetable easy to get
-                </h2>
-              </span>
 
-              <span className="  border-l-1 border-[#7a7e9a]">
-                <p className="leading-[1.8]  pl-10 text-[#7a7e9a] font-[400] text-[16px] max-w-[600px]">
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable.
-                </p>
-              </span>
-            </div>
-
-            <div className="flex">
-              <Image className="w-[40vw] h-auto" src={about} alt="seller" />
-
-              <div>
-                <div>
-                  <Swiper
-                    spaceBetween={50}
-                    slidesPerView={3}
-                    onSlideChange={() => console.log("slide change")}
-                    onSwiper={(swiper) => console.log(swiper)}
-                  >
-                    <div className="flex">
-                      <SwiperSlide>
-                        <div>
-                          <Image
-                            className="w-[20vw] h-auto relative top-2"
-                            src={about1}
-                            alt="seller"
-                          />
-                          <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
-                            <li className="flex gap-2 items-center">
-                              <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-                              <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                                Pure agro services
-                              </p>
-                            </li>
-                            <h3 className="text-[#333333] font-[800]">
-                              Rich in nutrients but no formal or defect
-                            </h3>
-                          </div>
-                        </div>
-                        <div>
-                          <Image
-                            className="w-[20vw] h-auto relative top-2"
-                            src={about2}
-                            alt="seller"
-                          />
-                          <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
-                            <li className="flex gap-2 items-center">
-                              <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-                              <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                                Pure agro services
-                              </p>
-                            </li>
-                            <h3 className="text-[#333333] font-[800]">
-                              Rich in nutrients but no formal or defect
-                            </h3>
-                          </div>
-                        </div>
-                        <div>
-                          <Image
-                            className="w-[20vw] h-auto relative top-2"
-                            src={about3}
-                            alt="seller"
-                          />
-                          <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
-                            <li className="flex gap-2 items-center">
-                              <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-                              <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                                Pure agro services
-                              </p>
-                            </li>
-                            <h3 className="text-[#333333] font-[800]">
-                              Rich in nutrients but no formal or defect
-                            </h3>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    </div>
-                  </Swiper>
-
-                  <h3 className="text-[#333333] text-[25px] font-bold">
-                    Life is not like a species do you believe?
-                  </h3>
-                  <p className="text-[#7a7e9a] text-[16px] font-[400] leading-[1.8]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    dorem ipsum dolor sit amet, consectetur adipiscing.
+                <span className="  border-l-1 border-[#7a7e9a]">
+                  <p className="leading-[1.8]  pl-10 text-[#7a7e9a] font-[400] text-[16px] max-w-[600px]">
+                    There are many variations of passages of Lorem Ipsum
+                    available, but the majority have suffered alteration in some
+                    form, by injected humour, or randomised words which don't
+                    look even slightly believable.
                   </p>
-                  <ul className="flex gap-2  flex-col flex-wrap">
-                    <span className="flex gap-5">
-                      <li className="flex items-center gap-2">
-                        <svg
-                          className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
-                        </svg>
-                        <p className="text-[16px] font-[400]">
-                          Get Back to Healthy Life
-                        </p>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <svg
-                          className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
-                        </svg>
-                        <p className="text-[16px] font-[400]">
-                          {" "}
-                          Wake up Refreshed
-                        </p>
-                      </li>
-                    </span>
-                    <span className="flex gap-5">
-                      <li className="flex items-center gap-2">
-                        <svg
-                          className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
-                        </svg>
-                        <p className="text-[16px] font-[400]">
-                          Set a Healthier Lifestyle
-                        </p>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <svg
-                          className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
-                        </svg>
-                        <p className="text-[16px] font-[400]">
-                          Boost Energy & Metabolism
-                        </p>
-                      </li>
-                    </span>
-                  </ul>
+                </span>
+              </div>
+
+              <div className="flex gap-10 justify-center">
+                <Image className="w-[40vw]" src={about} alt="seller" />
+
+                <div className="w-[40vw]">
+                  <div className="flex flex-col gap-3 ">
+                    <div
+                      ref={scrollRef}
+                      className="flex w-[40vw] gap-3 overflow-x-scroll no-scrollbar"
+                    >
+                      <div>
+                        <Image
+                          className="w-[20vw] h-auto relative top-2"
+                          src={about1}
+                          alt="seller"
+                        />
+                        <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                          <li className="flex gap-2 items-center">
+                            <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                            <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                              Pure agro services
+                            </p>
+                          </li>
+                          <h3 className="text-[#333333] font-[800]">
+                            Rich in nutrients but no formal or defect
+                          </h3>
+                        </div>
+                      </div>
+                      <div>
+                        <Image
+                          className="w-[20vw] h-auto relative top-2"
+                          src={about2}
+                          alt="seller"
+                        />
+                        <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                          <li className="flex gap-2 items-center">
+                            <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                            <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                              Pure agro services
+                            </p>
+                          </li>
+                          <h3 className="text-[#333333] font-[800]">
+                            Rich in nutrients but no formal or defect
+                          </h3>
+                        </div>
+                      </div>
+                      <div>
+                        <Image
+                          className="w-[20vw] h-auto relative top-2"
+                          src={about3}
+                          alt="seller"
+                        />
+                        <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                          <li className="flex gap-2 items-center">
+                            <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                            <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                              Pure agro services
+                            </p>
+                          </li>
+                          <h3 className="text-[#333333] font-[800]">
+                            Rich in nutrients but no formal or defect
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h3 className="text-[#333333] text-[25px] font-bold">
+                      Life is not like a species do you believe?
+                    </h3>
+                    <p className="text-[#7a7e9a] text-[16px] font-[400] leading-[1.8]">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed dorem ipsum dolor sit amet, consectetur adipiscing.
+                    </p>
+                    <ul className="flex gap-2  flex-col flex-wrap">
+                      <span className="flex gap-5">
+                        <li className="flex items-center gap-2">
+                          <svg
+                            className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
+                          </svg>
+                          <p className="text-[16px] font-[400]">
+                            Get Back to Healthy Life
+                          </p>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <svg
+                            className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
+                          </svg>
+                          <p className="text-[16px] font-[400]">
+                            {" "}
+                            Wake up Refreshed
+                          </p>
+                        </li>
+                      </span>
+                      <span className="flex gap-5">
+                        <li className="flex items-center gap-2">
+                          <svg
+                            className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
+                          </svg>
+                          <p className="text-[16px] font-[400]">
+                            Set a Healthier Lifestyle
+                          </p>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <svg
+                            className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
+                          </svg>
+                          <p className="text-[16px] font-[400]">
+                            Boost Energy & Metabolism
+                          </p>
+                        </li>
+                      </span>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="flex justify-center items-center">
+            <ul className="flex w-[85vw] bg-[#ffffff] rounded-[5px] relative top-20 py-10 fun-facts-content-area">
+              <li className="flex  w-[25%] border-dashed border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e]  font-[300] text-[50px]">
+                <span>120+</span>
+                <p className="text-[16px] font-[400]">Category Vegetable</p>
+              </li>
+              <li className="flex  w-[25%] border-dashed border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e] font-[300] text-[50px]">
+                <span>560+</span>
+                <p className="text-[16px] font-[400]">Home Supplier</p>
+              </li>
+              <li className="flex  w-[25%] border-dashed border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e] font-[300] text-[50px]">
+                <span>145+</span>
+                <p className="text-[16px] font-[400]">Seasonal Vegetables</p>
+              </li>
+              <li className="flex  w-[25%]  flex-col items-center text-[#209e2e] font-[300] text-[50px]">
+                <span>200+</span>
+                <p className="text-[16px] font-[400]">Attended Event</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="mt-30 py-30 flex flex-col items-center justify-center">
+          <p className="text-[#209e2e] text-center lg:text-[15px] font-[400] text-[14px]">
+            VISIT OUR SHOP
+          </p>
+          <h2 className="text-[38px] text-center font-[700] text-[#333333]">
+            Buy our product
+          </h2>
+          <p
+            className={`${
+              mode ? "text-white" : "text-[#7a7e9a]"
+            } "text-[16px] font-[400] leading-[1.8] text-center lg:max-w-[605px] m-auto`}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut laboreonsectetur adipiscinet dolore.
+          </p>
+
+          <span className="flex">
+            <button className="px-[20px] text-[#8d8c8c] border-dashed text-[18px] font-[400] border-r-1 cursor-pointer border-[#209e2e] hover:text-[#209e2e] transition">
+              Fresh Milk
+            </button>
+            <button className="px-[20px] text-[#8d8c8c] border-dashed text-[18px] font-[400] border-r-1 cursor-pointer border-[#209e2e] hover:text-[#209e2e] transition">
+              Fresh Vegetable
+            </button>
+            <button className="px-[20px] text-[#8d8c8c] border-dashed text-[18px] font-[400] cursor-pointer hover:text-[#209e2e] transition">
+              Fresh Fish
+            </button>
+          </span>
+
+          <div>
+            <div className="bg-[#d2ecd5] group hover:bg-white">
+              <div className="text-[#d2ecd5]">
+                <Image className="max-w-[100%] h-auto" src={veg1} alt="shape1" />
+                <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-bold text-[20px] transition">
+                  Fresh Cauliflower
+                </h3>
+                <span className="text-[#209e2e] text-[18px] font-bold transition">
+                  $50
+                </span>
+
+                <div>
+                  <span></span>
+                  <span>
+                    <svg
+                      className="text-[#f4a708] w-[20px]"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                    </svg>
+                  </span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+
+            <button className="bg-[#209e2e] mt-10 w-fit flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-white hover:text-[#209e2e] border-1 border-[#209e2e]">
+              <p className="font-medium lg:text-[17px]">All Products</p>
+              <svg
+                className="w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+              </svg>
+            </button>
           </div>
         </section>
       </section>
