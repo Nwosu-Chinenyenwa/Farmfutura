@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Nav() {
   return (
     <header className="mb-10 lg:mb-0">
-      <nav className="w-[100vw] fixed bg-[#ffffff]  shadow-sm  hidden lg:flex items-center justify-between text-[#333333] z-30 ">
+      <nav className="w-[100vw] fixed bg-[#ffffff]  shadow-md hidden lg:flex items-center justify-between text-[#333333] z-30 ">
         <div className="p-5  px-20">
           <Image src={logo} alt="logo" />
         </div>

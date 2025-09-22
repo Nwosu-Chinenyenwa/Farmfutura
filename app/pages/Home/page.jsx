@@ -29,14 +29,52 @@ import about3 from "../../../public/img/about3.png";
 import rag1 from "../../../public/img/shape-2 (1).png";
 import about from "../../../public/img/aboutM.jpg";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import eggplant from "../../../public/img/eggplant.png";
+import milk from "../../../public/img/milk.png";
+import more1 from "../../../public/asset/1 (1).png";
+import more2 from "../../../public/asset/2.png";
+import more3 from "../../../public/asset/3 (1).png";
+import more4 from "../../../public/asset/4.png";
+import more5 from "../../../public/asset/5.png";
+import more6 from "../../../public/asset/6.png";
+import more7 from "../../../public/asset/7.png";
+import more8 from "../../../public/asset/8.png";
+import more9 from "../../../public/asset/shape-2.png";
+import more10 from "../../../public/asset/shape.png";
+import morerag1 from "../../../public/asset/shape (1).png";
+import morerag2 from "../../../public/asset/shape-2 (1).png";
+import cowimg from "../../../public/asset/cow-image.png";
+import agree1 from "../../../public/asset/agree1.png";
+import agree from "../../../public/asset/agree.png";
+import deal1 from "../../../public/asset/newsletter-popup-1_570x.webp";
+import deal2 from "../../../public/asset/11_470x.webp";
+import Footer from "@/app/Components/Footer";
+import cultivationWhite from "../../../public/asset/cultivation-white.png";
+import { FaTruck } from "react-icons/fa";
+import Search from "@/app/Components/Search";
+import { GiFishEggs } from "react-icons/gi";
+import {
+  GiPlantRoots,
+  GiWheat,
+  GiCorn,
+  GiTomato,
+  GiCarrot,
+} from "react-icons/gi";
+import { MdOutlineEmojiPeople, MdOutlineAgriculture } from "react-icons/md";
+import Products from "@/app/Components/Products";
 
 export default function page() {
   const [showside, setshowside] = useState(false);
   const [hamburga, sethamburga] = useState(false);
   const [displayNav, setdisplayNav] = useState(false);
+  const [activeIndex, setactiveIndex] = useState(0);
   const [mode, setmode] = useState(false);
+  const [faq, setfaq] = useState(0);
+  const [dot, setdot] = useState(0);
+  const [view, setview] = useState(false);
+  const [showFirst, setShowFirst] = useState(true);
+
+  const search = () => setview(!view)
 
   let hamtoggle = useCallback(() => {
     sethamburga((prev) => !prev);
@@ -45,7 +83,7 @@ export default function page() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const Scroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 5) {
         sethamburga(false);
       }
     };
@@ -54,28 +92,14 @@ export default function page() {
 
     return () => window.removeEventListener("scroll", Scroll);
   }, []);
-  /* 
-  let images = [
-    {
-      img: about1,
-      alt: "about1",
-      title: "Rich in nutrients but no formal or defect",
-      distription: "Pure agro services",
-    },
-    {
-      img: about2,
-      alt: "about2",
-      title: "Rich in nutrients but no formal or defect",
-      distription: "Pure agro services",
-    },
-    {
-      img: about3,
-      alt: "about3",
-      title: "Rich in nutrients but no formal or defect",
-      distription: "Pure agro services",
-    },
-  ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowFirst((prev) => !prev);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+  /* 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [mo, setmo] = useState(false);
@@ -184,20 +208,6 @@ export default function page() {
               </li>
             </div>
 
-            <div className="w-35 fixed left-1 top-125 lg:top-120 z-10">
-              <div className="checkbox-wrapper-5">
-                <div className="check">
-                  <input
-                    id="check-5"
-                    type="checkbox"
-                    checked={mode}
-                    onChange={(e) => setmode(e.target.checked)}
-                  />
-                  <label htmlFor="check-5"></label>
-                </div>
-              </div>
-            </div>
-
             <button className="bg-[#82b440] text-white fixed right-5 z-10 cursor-pointer top-70 shake-btn rounded-4xl p-1.5 px-4 font-medium hover:bg-[#15803d] lg:p-2 lg:px-5">
               Buy Now
             </button>
@@ -208,11 +218,25 @@ export default function page() {
                   <Image src={logo} alt="logo" />
                 </div>
                 <ul className="hidden lg:flex items-center gap-10 link p-5  border px-20 justify-center font-medium">
-                  <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                  <li
+                    onClick={() => setdot(0)}
+                    className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
+                      dot === 0
+                        ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
+                        : ""
+                    }`}
+                  >
                     Home
                   </li>
 
-                  <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                  <li
+                    onClick={() => setdot(1)}
+                    className={`relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e] ${
+                      dot === 1
+                        ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
+                        : ""
+                    }`}
+                  >
                     About
                   </li>
                   <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
@@ -262,17 +286,32 @@ export default function page() {
                       </li>
                     </ul>
                   </li>
-                  <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                  <li
+                    onClick={() => setdot(2)}
+                    className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
+                      dot === 2
+                        ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
+                        : ""
+                    }`}
+                  >
                     News
                   </li>
-                  <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                  <li
+                    onClick={() => setdot(3)}
+                    className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
+                      dot === 3
+                        ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
+                        : ""
+                    }`}
+                  >
                     Contact
                   </li>
                 </ul>
 
                 <ul className="flex items-center p-5  gap-5 px-20">
-                  <li>
+                  <li className=" relative">
                     <svg
+                    onClick={search}
                       className="w-9 text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7] hover:text-white hover:bg-[#82b440] cursor-pointer transition"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -280,6 +319,12 @@ export default function page() {
                     >
                       <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
                     </svg>
+
+                    {view && (
+                      <div className="absolute right-0.5 top-15 bg-white w-[23vw] h-[80px] flex items-center justify-center">
+                        <Search />
+                      </div>
+                    )}
                   </li>
                   <li className=" relative text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7] hover:text-white hover:bg-[#82b440] cursor-pointer transition">
                     <svg
@@ -315,6 +360,7 @@ export default function page() {
 
                   <div className="flex items-center gap-2">
                     <svg
+                    onClick={search}
                       className="w-5 list-none relative text-[#333333]  cursor-pointer transition"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -322,6 +368,12 @@ export default function page() {
                     >
                       <path d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z"></path>
                     </svg>
+
+                         {view && (
+                      <div className="absolute top-15 left-0 bg-white w-[80vw] h-[60px] flex items-center justify-center">
+                        <Search />
+                      </div>
+                    )}
                     <div>
                       <li className="list-none relative  p-2 text-[#333333] cursor-pointer transition">
                         <svg
@@ -721,6 +773,8 @@ export default function page() {
           <Image src={rag} alt="shape2" />
         </section>
 
+        <Products />
+
         <section className="lg:pt-[100px] pt-[50px] pb-[30px] lg:pb-[100px]">
           <div>
             <span className="text-center">
@@ -834,18 +888,18 @@ export default function page() {
 
           <div className="pb-10">
             <div>
-              <div className="flex items-center w-[80vw] m-auto my-[60px]">
+              <div className="lg:flex items-center lg:w-[80vw] m-auto my-[30px] pl-1">
                 <span className="w-[60vw]">
-                  <span className="text-[#209e2e] text-[15px] block mb-[8px]">
+                  <span className="text-[#209e2e] text-[14px] lg:text-[15px] block mb-[8px]">
                     KNOW ABOUT US
                   </span>
-                  <h2 className="text-[38px] font-[700] text-[#333333]">
+                  <h2 className="text-[25px] lg:text-[38px] font-[700] text-[#333333]">
                     The territory might be safe is vegetable easy to get
                   </h2>
                 </span>
 
-                <span className="  border-l-1 border-[#7a7e9a]">
-                  <p className="leading-[1.8]  pl-10 text-[#7a7e9a] font-[400] text-[16px] max-w-[600px]">
+                <span className="lg:border-l-1 border-[#7a7e9a]">
+                  <p className="leading-[1.8]  lg:pl-10 text-[#7a7e9a] font-[400] text-[16px] lg:max-w-[600px]">
                     There are many variations of passages of Lorem Ipsum
                     available, but the majority have suffered alteration in some
                     form, by injected humour, or randomised words which don't
@@ -854,22 +908,26 @@ export default function page() {
                 </span>
               </div>
 
-              <div className="flex gap-10 justify-center">
-                <Image className="w-[40vw]" src={about} alt="seller" />
+              <div className="flex flex-col lg:flex-row gap-10 justify-center items-center">
+                <Image
+                  className="w-[90vw] lg:w-[40vw]"
+                  src={about}
+                  alt="seller"
+                />
 
-                <div className="w-[40vw]">
-                  <div className="flex flex-col gap-3 ">
+                <div className="lg:w-[40vw]">
+                  <div className="flex flex-col gap-3 items-center justify-center ">
                     <div
                       ref={scrollRef}
-                      className="flex w-[40vw] gap-3 overflow-x-scroll no-scrollbar"
+                      className="flex lg:w-[100vw] lg:items-center lg:justify-center gap-3 overflow-x-scroll no-scrollbar"
                     >
                       <div>
                         <Image
-                          className="w-[20vw] h-auto relative top-2"
+                          className="w-npm rlg:w-[80vw] h-auto relative top-2"
                           src={about1}
                           alt="seller"
                         />
-                        <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                        <div className="w-[80vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
                           <li className="flex gap-2 items-center">
                             <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                             <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
@@ -992,20 +1050,20 @@ export default function page() {
           </div>
 
           <div className="flex justify-center items-center">
-            <ul className="flex w-[85vw] bg-[#ffffff] rounded-[5px] relative top-20 py-10 fun-facts-content-area">
-              <li className="flex  w-[25%] border-dashed border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e]  font-[300] text-[50px]">
+            <ul className="flex flex-col lg:gap-0 gap-5 lg:flex-row items-center justify-center w-[90vw] lg:w-[85vw] bg-[#ffffff] rounded-[5px] relative top-20 py-10 fun-facts-content-area">
+              <li className="flex  lg:w-[25%] border-dashed lg:border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e]  font-[300] text-[50px]">
                 <span>120+</span>
                 <p className="text-[16px] font-[400]">Category Vegetable</p>
               </li>
-              <li className="flex  w-[25%] border-dashed border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e] font-[300] text-[50px]">
+              <li className="flex  lg:w-[25%] border-dashed lg:border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e] font-[300] text-[50px]">
                 <span>560+</span>
                 <p className="text-[16px] font-[400]">Home Supplier</p>
               </li>
-              <li className="flex  w-[25%] border-dashed border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e] font-[300] text-[50px]">
+              <li className="flex  lg:w-[25%] border-dashed lg:border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e] font-[300] text-[50px]">
                 <span>145+</span>
                 <p className="text-[16px] font-[400]">Seasonal Vegetables</p>
               </li>
-              <li className="flex  w-[25%]  flex-col items-center text-[#209e2e] font-[300] text-[50px]">
+              <li className="flex lg:w-[25%]  flex-col items-center text-[#209e2e] font-[300] text-[50px]">
                 <span>200+</span>
                 <p className="text-[16px] font-[400]">Attended Event</p>
               </li>
@@ -1013,7 +1071,7 @@ export default function page() {
           </div>
         </section>
 
-        <section className="mt-30 py-30 flex flex-col items-center justify-center">
+        <section className="mt-30 py-30 flex flex-col items-center justify-center gap-0 lg:gap-5">
           <p className="text-[#209e2e] text-center lg:text-[15px] font-[400] text-[14px]">
             VISIT OUR SHOP
           </p>
@@ -1029,48 +1087,1243 @@ export default function page() {
             eiusmod tempor incididunt ut laboreonsectetur adipiscinet dolore.
           </p>
 
-          <span className="flex">
-            <button className="px-[20px] text-[#8d8c8c] border-dashed text-[18px] font-[400] border-r-1 cursor-pointer border-[#209e2e] hover:text-[#209e2e] transition">
+          <span className="flex my-5 lg:mt-10 gap-5 lg:gap-0">
+            <button
+              onClick={() => setactiveIndex(0)}
+              className={`border-dashed lg:border-r cursor-pointer border-[#209e2e] lg:px-[20px] text-[18px] font-[400] transition ${
+                activeIndex === 0 ? "text-[#209e2e]" : "text-[#8d8c8c]"
+              }`}
+            >
               Fresh Milk
             </button>
-            <button className="px-[20px] text-[#8d8c8c] border-dashed text-[18px] font-[400] border-r-1 cursor-pointer border-[#209e2e] hover:text-[#209e2e] transition">
+            <button
+              onClick={() => setactiveIndex(2)}
+              className={`border-dashed lg:border-r cursor-pointer border-[#209e2e] lg:px-[20px] text-[18px] font-[400] transition ${
+                activeIndex === 2 ? "text-[#209e2e]" : "text-[#8d8c8c]"
+              }`}
+            >
               Fresh Vegetable
             </button>
-            <button className="px-[20px] text-[#8d8c8c] border-dashed text-[18px] font-[400] cursor-pointer hover:text-[#209e2e] transition">
+            <button
+              onClick={() => setactiveIndex(3)}
+              className={`border-dashed lg:border-r cursor-pointer border-[#209e2e] lg:px-[20px] text-[18px] font-[400] transition ${
+                activeIndex === 3 ? "text-[#209e2e]" : "text-[#8d8c8c]"
+              }`}
+            >
               Fresh Fish
             </button>
           </span>
 
           <div>
-            <div className="bg-[#d2ecd5] group hover:bg-white">
-              <div className="text-[#d2ecd5]">
-                <Image className="max-w-[100%] h-auto" src={veg1} alt="shape1" />
-                <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-bold text-[20px] transition">
-                  Fresh Cauliflower
-                </h3>
-                <span className="text-[#209e2e] text-[18px] font-bold transition">
-                  $50
-                </span>
+            {activeIndex === 0 && (
+              <div className="flex lg:flex-row flex-col items-center justify-center  gap-5 slideDown">
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={veg1}
+                      alt="shape1"
+                    />
+                    <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Fresh Cauliflower
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $50
+                    </span>
 
-                <div>
-                  <span></span>
-                  <span>
-                    <svg
-                      className="text-[#f4a708] w-[20px]"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
-                    </svg>
-                  </span>
-                  <span></span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+ 
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={veg3}
+                      alt="shape1"
+                    />
+                     <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Bunch Fresh Fish
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $90
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={eggplant}
+                      alt="shape1"
+                    />
+                   <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Fresh Eggplant
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $40
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={milk}
+                      alt="shape1"
+                    />
+                   <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Organic Milk
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $60
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            )}
+            {activeIndex === 2 && (
+ <div className="flex lg:flex-row flex-col items-center justify-center  gap-5 slideDown">
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={veg1}
+                      alt="shape1"
+                    />
+                    <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Fresh Cauliflower
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $50
+                    </span>
+
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+ 
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={veg3}
+                      alt="shape1"
+                    />
+                     <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Bunch Fresh Fish
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $90
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={eggplant}
+                      alt="shape1"
+                    />
+                   <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Fresh Eggplant
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $40
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={milk}
+                      alt="shape1"
+                    />
+                   <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Organic Milk
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $60
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            )}
+            {activeIndex === 3 && (
+              <div className="flex lg:flex-row flex-col items-center justify-center  gap-5 slideDown">
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={veg1}
+                      alt="shape1"
+                    />
+                    <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Fresh Cauliflower
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $50
+                    </span>
+
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+ 
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={veg3}
+                      alt="shape1"
+                    />
+                     <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Bunch Fresh Fish
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $90
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={eggplant}
+                      alt="shape1"
+                    />
+                   <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Fresh Eggplant
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $40
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+                <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <Image
+                      className="w-[40vw] lg:w-[12vw] mb-4 h-auto"
+                      src={milk}
+                      alt="shape1"
+                    />
+                   <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      Organic Milk
+                    </h3>
+                    <span className="text-[#209e2e] text-[18px] font-extrabold transition">
+                      $60
+                    </span>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                      <span className="flex gap-1">
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                        <svg
+                          className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                        </svg>
+                      </span>
+                      <span className="w-[25vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <svg
+                        className="w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                      </svg>
+
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            )}
+          </div>
+
+          <button className="bg-[#209e2e] mt-10 w-fit px-5 flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-white hover:text-[#209e2e] border-1 border-[#209e2e]">
+            <p className="font-medium lg:text-[17px]">All Products</p>
+            <svg
+              className="w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+            </svg>
+          </button>
+        </section>
+
+        <section className="flex items-center justify-center relative">
+          <div className="bg-[#fefaf0] ">
+            <Image src={morerag2} alt="morerag1" />
+            <div className="flex items-center justify-center relative bg-[#fefaf0] py-20">
+              <Image className="absolute left-0 hidden lg:block" src={more9} alt="morerag2" />
+              <div className="w-[80vw] overflow-hidden border-b border-[#209e2e] border-dashed">
+                <div className="flex resanimate-slide-x  lg:animate-slide-x">
+                  <Image
+                    className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more1}
+                    alt="more1"
+                  />
+                  <Image
+                    className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more2}
+                    alt="more2"
+                  />
+                  <Image
+                    className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more3}
+                    alt="more3"
+                  />
+                  <Image
+                  className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more4}
+                    alt="more4"
+                  />
+                  <Image
+                     className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more5}
+                    alt="more5"
+                  />
+                  <Image
+                     className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more6}
+                    alt="more6"
+                  />
+                  <Image
+                   className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more7}
+                    alt="more7"
+                  />
+                  <Image
+                  className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
+                    src={more8}
+                    alt="more8"
+                  />
                 </div>
               </div>
+              <Image className="absolute right-0 hidden lg:block" src={more10} alt="morerag3" />
             </div>
+            <Image src={morerag1} alt="morerag1" />
+          </div>
+        </section>
 
-            <button className="bg-[#209e2e] mt-10 w-fit flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-white hover:text-[#209e2e] border-1 border-[#209e2e]">
-              <p className="font-medium lg:text-[17px]">All Products</p>
+        <section className="py-30 flex flex-col items-center justify-center">
+          <p className="text-[#209e2e] text-center lg:text-[15px] font-[400] text-[14px]">
+            AREA FISH AND COW
+          </p>
+          <h2 className="lg:text-[38px] text-[27px] text-center font-[700] text-[#333333]">
+            Rest of the two sector here
+          </h2>
+          <p
+            className={`${
+              mode ? "text-white" : "text-[#7a7e9a]"
+            } "text-[14px] lg:text-[16px] font-[400] leading-[1.8] text-center lg:max-w-[605px] m-auto`}
+          >
+            Olor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut laboreonsectetur adipiscinamet, consectetur
+            adipiscingmpor.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-2 lg:gap-5 items-center">
+            <button className="bg-[#209e2e] mt-10 px-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-white hover:text-[#209e2e] border-1 border-[#209e2e]">
+              <p className="font-medium lg:text-[17px]">See Cow Farm</p>
+              <svg
+                className="w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+              </svg>
+            </button>
+ 
+            <button className="bg-[#ffdd9b] mt-10 w-fit px-5 flex justify-center items-center lg:px-8 gap-1 text-[#5c5b5a] border-1 border-[#5a5959] cursor-pointer transition p-3 rounded-4xl hover:bg-[#209e2e] hover:text-white">
+              <p className="font-medium lg:text-[17px]">See Fish Farm</p>
               <svg
                 className="w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1081,8 +2334,271 @@ export default function page() {
               </svg>
             </button>
           </div>
+
+          <Image className="mt-10" src={cowimg} alt="cow" />
+        </section>
+
+        <section className="flex items-center justify-center relative">
+          <div>
+            <Image src={morerag2} alt="morerag1" />
+
+            <div className="faq p-2 lg:py-20 flex lg:flex-row gap-5 lg:gap-0 flex-col items-center justify-center">
+              <div className="lg:w-[40vw] flex flex-col gap-2">
+                <p className="text-[#209e2e] font-[400] text-[14px]">
+                  frequently questions
+                </p>
+                <h2 className="text-[27px] lg:text-[38px] font-[700] text-[#333333]">
+                  The question a lot time we get from our customer
+                </h2>
+                <button className="bg-[#209e2e] lg:mt-5 w-fit px-5  flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-[#5c5b5a] hover:text-white">
+                  <p className="font-medium lg:text-[17px]">Ask Yours</p>
+                  <svg
+                    className="w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="lg:w-[45vw] flex flex-col gap-5">
+                <span>
+                  <li
+                    onClick={() => setfaq(0)}
+                    className="list-none flex items-center  cursor-pointer"
+                  >
+                    <svg
+                      className="w-[8vw] lg:w-[2vw] mr-[5px] text-[#209e2e]"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                    </svg>
+                    <p className="text-[#696d8b] font-extrabold text-[15px] lg:text-[20px]">
+                      Why will we buy products from this company?
+                    </p>
+                  </li>
+
+                  {faq === 0 && (
+                    <p className="text-[14px] lg:text-[16px] faq font-[400] text-[#7a7e9a] leading-[1.8] pt-[10px]">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed dorem ipsum dolor sit amet, consectetur adipiscing.
+                    </p>
+                  )}
+                </span>
+                <span>
+                  <li
+                    onClick={() => setfaq(1)}
+                    className="list-none flex items-center cursor-pointer"
+                  >
+                    <svg
+                      className="w-[8vw] lg:w-[2vw] mr-[5px] text-[#209e2e]"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                    </svg>
+                    <p className="text-[#696d8b] font-extrabold text-[15px] lg:text-[20px]">
+                      Is it possible to have natural products?
+                    </p>
+                  </li>
+                  {faq === 1 && (
+                    <p className="text-[14px] lg:text-[16px] faq font-[400] text-[#7a7e9a] leading-[1.8] pt-[10px]">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed dorem ipsum dolor sit amet, consectetur adipiscing.
+                    </p>
+                  )}
+                </span>
+              </div>
+            </div>
+            <Image src={morerag2} alt="morerag1" />
+          </div>
+        </section>
+
+        <section className="flex lg:flex-row  relative">
+          <div className="w-[50vw] flex flex-col gap-3 bg-transparent relative left-30">
+            <p className="text-[#209e2e]  lg:text-[15px] font-[400] text-[14px]">
+              A SUMMARY
+            </p>
+            <h2 className="text-[38px]  font-[700] text-[#333333]">
+              A brief what we use how use the impression help you
+            </h2>
+            <p
+              className={`${
+                mode ? "text-white" : "text-[#7a7e9a]"
+              } "text-[16px] font-[400] leading-[1.8`}
+            >
+              On the first paragraph crucial text will be appeared consectetur
+              adicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore..
+            </p>
+            <p
+              className={`${
+                mode ? "text-white" : "text-[#7a7e9a]"
+              } "text-[16px] font-[400] leading-[1.8] ]`}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco.
+            </p>
+
+            <button className="bg-[#eafef1] mt-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-[#209e2e] cursor-pointer transition border-1 border-[#209e2e] p-3 rounded-4xl hover:bg-[#209e2e] hover:text-white">
+              <p className="font-medium lg:text-[17px]">Cultivatons</p>
+              <svg
+                className="w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div className="relative flex">
+            <Image src={agree} alt="agree" />
+            <Image
+              className="absolute right-0 w-[40vw]"
+              src={agree1}
+              alt="agree"
+            />
+          </div>
+        </section>
+
+        <section className="py-30">
+          <div className="flex flex-col items-center w-full">
+            {/* Icons row */}
+            <div className="flex justify-between w-[80%] relative transition-all duration-500">
+              {showFirst ? (
+                <>
+                  {/* First 4 */}
+                  <div className="flex flex-col items-center">
+                    <MdOutlineEmojiPeople className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Use of Land
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <GiFishEggs className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Feed of Fish
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <FaTruck className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Home Delivery
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <GiPlantRoots className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Planting
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Second 4 */}
+                  <div className="flex flex-col items-center">
+                    <GiWheat className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Harvest
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <MdOutlineAgriculture className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Farmer
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <GiTomato className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Tomato
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <GiCarrot className="text-green-600 text-6xl" />
+                    <p className="mt-2 text-lg font-bold text-gray-800">
+                      Carrot
+                    </p>
+                  </div>
+                </>
+              )}
+
+              {/* Green dashed line */}
+              <div className="absolute bottom-[-25px] left-0 w-full border-t-1 border-dashed border-green-600"></div>
+
+              {/* Green dots (always 4, since we only show 4 steps at once) */}
+              <div className="absolute bottom-[-30px] left-0 w-full flex justify-between">
+                <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f7f5eb] flex items-center justify-center rajdhani-light">
+          <div className="flex pt-[70px] pb-[70px] items-center">
+            <Image className="w-[50vw]" src={deal2} alt="deal1" />
+            <div className="text-center flex flex-col items-center justify-center">
+              <h2 className="text-[#80b500] text-[30px] font-[700] mb-[15px] italic">
+                Todays Hot Deals
+              </h2>
+              <h1 className="text-[#071c1f] text-[50px] font-[700] mb-[15px]">
+                Original Stock Honey Combo Package
+              </h1>
+              <ul className="flex items-center gap-5 justify-center">
+                <li className="flex flex-col items-center gap-2">
+                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                    00
+                  </h1>
+                  <p className="text-[20px] text-[#071c1f]">Days</p>
+                </li>
+                <li className="flex flex-col items-center gap-2">
+                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                    00
+                  </h1>
+                  <p className="text-[20px] text-[#071c1f]">Hrs</p>
+                </li>
+                <li className="flex flex-col items-center gap-2">
+                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                    00
+                  </h1>
+                  <p className="text-[20px] text-[#071c1f]">Mins</p>
+                </li>
+                <li className="flex flex-col items-center gap-2">
+                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                    00
+                  </h1>
+                  <p className="text-[20px] text-[#071c1f]">Secs</p>
+                </li>
+              </ul>
+
+              <button className="bg-[#209e2e] mt-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-[white] cursor-pointer transition border-1 border-[#209e2e] p-3 rounded-4xl hover:bg-[#eafef1] hover:text-[#209e2e]">
+                <p className="font-medium lg:text-[17px]">Shop now</p>
+                <svg
+                  className="w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+              </button>
+            </div>
+            <Image className="relative top-30" src={deal1} alt="deal2" />
+          </div>
         </section>
       </section>
+      <Footer />
     </>
   );
 }
