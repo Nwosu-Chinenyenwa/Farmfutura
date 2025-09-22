@@ -775,7 +775,7 @@ export default function page() {
 
         <Products />
 
-        <section className="lg:pt-[100px] pt-[50px] pb-[30px] lg:pb-[100px]">
+        <section className="lg:pt-[100px] pt-[50px] pb-[30px] lg:pb-[100px] p-2 lg:p-0">
           <div>
             <span className="text-center">
               <p className="text-[#209e2e] lg:text-[15px] font-[400] text-[14px]">
@@ -915,37 +915,19 @@ export default function page() {
                   alt="seller"
                 />
 
-                <div className="lg:w-[40vw]">
-                  <div className="flex flex-col gap-3 items-center justify-center ">
+                <div className="lg:w-[40vw] p-2  lg:p-0">
+                  <div className="flex flex-col gap-3 lg:items-center lg:justify-center ">
                     <div
-                      ref={scrollRef}
-                      className="flex lg:w-[100vw] lg:items-center lg:justify-center gap-3 overflow-x-scroll no-scrollbar"
+                 /*      ref={scrollRef} */
+                      className="flex lg:w-[40vw] w-[95vw] justify-center items-center gap-3 overflow-x-scroll no-scrollbar"
                     >
-                      <div>
+                  <div>
                         <Image
-                          className="w-npm rlg:w-[80vw] h-auto relative top-2"
-                          src={about1}
-                          alt="seller"
-                        />
-                        <div className="w-[80vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
-                          <li className="flex gap-2 items-center">
-                            <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-                            <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                              Pure agro services
-                            </p>
-                          </li>
-                          <h3 className="text-[#333333] font-[800]">
-                            Rich in nutrients but no formal or defect
-                          </h3>
-                        </div>
-                      </div>
-                      <div>
-                        <Image
-                          className="w-[20vw] h-auto relative top-2"
+                          className="w-[90vw] lg:w-[20vw] h-auto relative top-2"
                           src={about2}
                           alt="seller"
                         />
-                        <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                        <div className="w-[90vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
                           <li className="flex gap-2 items-center">
                             <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                             <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
@@ -959,11 +941,29 @@ export default function page() {
                       </div>
                       <div>
                         <Image
-                          className="w-[20vw] h-auto relative top-2"
+                          className="w-[90vw] lg:w-[20vw] h-auto relative top-2"
+                          src={about2}
+                          alt="seller"
+                        />
+                        <div className="w-[90vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                          <li className="flex gap-2 items-center">
+                            <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                            <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                              Pure agro services
+                            </p>
+                          </li>
+                          <h3 className="text-[#333333] font-[800]">
+                            Rich in nutrients but no formal or defect
+                          </h3>
+                        </div>
+                      </div>
+                      <div>
+                        <Image
+                          className="w-[90vw] lg:w-[20vw] h-auto relative top-2"
                           src={about3}
                           alt="seller"
                         />
-                        <div className="w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                        <div className="w-[90vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
                           <li className="flex gap-2 items-center">
                             <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                             <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
@@ -977,15 +977,15 @@ export default function page() {
                       </div>
                     </div>
 
-                    <h3 className="text-[#333333] text-[25px] font-bold">
+                    <h3 className="text-[#333333] text-[25px] p-2 lg:p-0 font-bold">
                       Life is not like a species do you believe?
                     </h3>
-                    <p className="text-[#7a7e9a] text-[16px] font-[400] leading-[1.8]">
+                    <p className="text-[#7a7e9a] text-[14px] p-2 lg:p-0  lg:text-[16px] font-[400] leading-[1.8]">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed dorem ipsum dolor sit amet, consectetur adipiscing.
                     </p>
-                    <ul className="flex gap-2  flex-col flex-wrap">
-                      <span className="flex gap-5">
+                    <ul className="flex gap-2 p-2 lg:p-0 flex-col flex-wrap">
+                      <span className="flex lg:flex-row flex-col gap-2 lg:gap-5">
                         <li className="flex items-center gap-2">
                           <svg
                             className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
@@ -1014,7 +1014,7 @@ export default function page() {
                           </p>
                         </li>
                       </span>
-                      <span className="flex gap-5">
+                      <span className="flex lg:flex-row flex-col gap-2 lg:gap-5">
                         <li className="flex items-center gap-2">
                           <svg
                             className="border-1 w-[35px] p-2 rounded-4xl border-[#209e2e] text-[#209e2e] bg-[#eafef1]"
@@ -1048,7 +1048,7 @@ export default function page() {
               </div>
             </div>
           </div>
-
+            
           <div className="flex justify-center items-center">
             <ul className="flex flex-col lg:gap-0 gap-5 lg:flex-row items-center justify-center w-[90vw] lg:w-[85vw] bg-[#ffffff] rounded-[5px] relative top-20 py-10 fun-facts-content-area">
               <li className="flex  lg:w-[25%] border-dashed lg:border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e]  font-[300] text-[50px]">
@@ -2446,7 +2446,7 @@ export default function page() {
               enim ad minim veniam, quis nostrud exercitation ullamco.
             </p>
 
-            <button className="bg-[#eafef1] mt-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-[#209e2e] cursor-pointer transition border-1 border-[#209e2e] p-3 rounded-4xl hover:bg-[#209e2e] hover:text-white">
+            <button className="bg-[#eafef1] px-5 mt-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-[#209e2e] cursor-pointer transition border-1 border-[#209e2e] p-3 rounded-4xl hover:bg-[#209e2e] hover:text-white">
               <p className="font-medium lg:text-[17px]">Cultivatons</p>
               <svg
                 className="w-6"
