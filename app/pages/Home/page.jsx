@@ -208,7 +208,7 @@ export default function page() {
               </li>
             </div>
 
-            <button className="bg-[#82b440] text-white fixed right-5 z-10 cursor-pointer top-70 shake-btn rounded-4xl p-1.5 px-4 font-medium hover:bg-[#15803d] lg:p-2 lg:px-5">
+            <button className="bg-[#82b440] text-white fixed right-10 lg:right-5 z-10 cursor-pointer top-70 shake-btn rounded-4xl p-1.5 px-4 font-medium hover:bg-[#15803d] lg:p-2 lg:px-5">
               Buy Now
             </button>
 
@@ -523,7 +523,7 @@ export default function page() {
               </section>
             </header>
 
-            <section className="lg:py-30 py-20">
+            <section className="lg:py-30 py-20 px-2 lg:px-0">
               <div className="flex justify-start items-center">
                 <div className=" flex-col hidden   items-center gap-10 lg:flex">
                   <div className="flex  bg-transparent">
@@ -2419,18 +2419,18 @@ export default function page() {
           </div>
         </section>
 
-        <section className="flex lg:flex-row  relative">
-          <div className="w-[50vw] flex flex-col gap-3 bg-transparent relative left-30">
+        <section className="flex lg:flex-row flex-col  relative mt-15 lg:mt-0">
+          <div className="lg:w-[50vw] p-2 lg:p-0 flex flex-col gap-3 bg-transparent relative lg:left-30">
             <p className="text-[#209e2e]  lg:text-[15px] font-[400] text-[14px]">
               A SUMMARY
             </p>
-            <h2 className="text-[38px]  font-[700] text-[#333333]">
+            <h2 className="text-[25px] lg:text-[38px]  font-[700] text-[#333333]">
               A brief what we use how use the impression help you
             </h2>
             <p
               className={`${
                 mode ? "text-white" : "text-[#7a7e9a]"
-              } "text-[16px] font-[400] leading-[1.8`}
+              } "text-[14px] lg:text-[16px] font-[400] leading-[1.8`}
             >
               On the first paragraph crucial text will be appeared consectetur
               adicing elit, sed do eiusmod tempor incididunt ut labore et
@@ -2439,7 +2439,7 @@ export default function page() {
             <p
               className={`${
                 mode ? "text-white" : "text-[#7a7e9a]"
-              } "text-[16px] font-[400] leading-[1.8] ]`}
+              }"text-[14px] lg:text-[16px] font-[400] leading-[1.8] ]`}
             >
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -2462,14 +2462,14 @@ export default function page() {
           <div className="relative flex">
             <Image src={agree} alt="agree" />
             <Image
-              className="absolute right-0 w-[40vw]"
+              className="absolute right-0 w-[1000vw] lg:w-[40vw]"
               src={agree1}
               alt="agree"
             />
           </div>
         </section>
 
-        <section className="py-30">
+        <section className="py-30 hidden lg:block">
           <div className="flex flex-col items-center w-full">
             {/* Icons row */}
             <div className="flex justify-between w-[80%] relative transition-all duration-500">
@@ -2545,44 +2545,44 @@ export default function page() {
           </div>
         </section>
 
-        <section className="bg-[#f7f5eb] flex items-center justify-center rajdhani-light">
+        <section className="bg-[#f7f5eb] flex items-center mt-10 lg:mt-0 justify-center rajdhani-light">
           <div className="flex pt-[70px] pb-[70px] items-center">
-            <Image className="w-[50vw]" src={deal2} alt="deal1" />
+            <Image className="w-[50vw] hidden lg:block" src={deal2} alt="deal1" />
             <div className="text-center flex flex-col items-center justify-center">
-              <h2 className="text-[#80b500] text-[30px] font-[700] mb-[15px] italic">
+              <h2 className="text-[#80b500] text-[25px] lg:text-[30px] font-[700] mb-[15px] italic">
                 Todays Hot Deals
               </h2>
-              <h1 className="text-[#071c1f] text-[50px] font-[700] mb-[15px]">
+              <h1 className="text-[#071c1f] text-[25px] lg:text-[50px] font-[700] mb-[15px]">
                 Original Stock Honey Combo Package
               </h1>
               <ul className="flex items-center gap-5 justify-center">
                 <li className="flex flex-col items-center gap-2">
-                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                  <h1 className="text-[#071c1f] bg-[#fff] w-[50px] h-[50px] lg:w-[70px] lg:h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[20px] lg:text-[24px]">
                     00
                   </h1>
                   <p className="text-[20px] text-[#071c1f]">Days</p>
                 </li>
                 <li className="flex flex-col items-center gap-2">
-                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                  <h1 className="text-[#071c1f] bg-[#fff]  w-[50px] h-[50px] lg:w-[70px] lg:h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
                     00
                   </h1>
                   <p className="text-[20px] text-[#071c1f]">Hrs</p>
                 </li>
                 <li className="flex flex-col items-center gap-2">
-                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                  <h1 className="text-[#071c1f] bg-[#fff]  w-[50px] h-[50px] lg:w-[70px] lg:h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
                     00
                   </h1>
                   <p className="text-[20px] text-[#071c1f]">Mins</p>
                 </li>
                 <li className="flex flex-col items-center gap-2">
-                  <h1 className="text-[#071c1f] bg-[#fff] w-[70px] h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
+                  <h1 className="text-[#071c1f] bg-[#fff]  w-[50px] h-[50px] lg:w-[70px] lg:h-[70px] flex items-center justify-center rounded-full m-auto font-[700] text-[24px]">
                     00
                   </h1>
                   <p className="text-[20px] text-[#071c1f]">Secs</p>
                 </li>
               </ul>
 
-              <button className="bg-[#209e2e] mt-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-[white] cursor-pointer transition border-1 border-[#209e2e] p-3 rounded-4xl hover:bg-[#eafef1] hover:text-[#209e2e]">
+              <button className="bg-[#209e2e] px-5 mt-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-[white] cursor-pointer transition border-1 border-[#209e2e] p-3 rounded-4xl hover:bg-[#eafef1] hover:text-[#209e2e]">
                 <p className="font-medium lg:text-[17px]">Shop now</p>
                 <svg
                   className="w-6"
@@ -2594,7 +2594,7 @@ export default function page() {
                 </svg>
               </button>
             </div>
-            <Image className="relative top-30" src={deal1} alt="deal2" />
+            <Image className="relative top-30  hidden lg:block" src={deal1} alt="deal2" />
           </div>
         </section>
       </section>
