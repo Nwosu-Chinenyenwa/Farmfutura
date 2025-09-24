@@ -178,7 +178,7 @@ export default function page() {
         ) : (
           ""
         )}
-        <section className="relative nav-hero">
+        <section className="relative nav-hero ">
           <div className="bg-[#000000d6]">
             <Image
               className="w-20 leave absolute hidden lg:block"
@@ -186,7 +186,7 @@ export default function page() {
               alt="shape2"
             />
             <Image
-              className="w-35 x absolute right-10 top-150 hidden lg:block"
+              className="w-35 x absolute right-10 lg:top-140 xl:top-150 hidden lg:block"
               src={shape1}
               alt="shape1"
             />
@@ -208,16 +208,16 @@ export default function page() {
               </li>
             </div>
 
-            <button className="bg-[#82b440] text-white fixed right-10 lg:right-5 z-10 cursor-pointer top-70 shake-btn rounded-4xl p-1.5 px-4 font-medium hover:bg-[#15803d] lg:p-2 lg:px-5">
+            <button className="bg-[#82b440] text-white fixed  right-10 xl:right-5 z-10 cursor-pointer top-70 shake-btn rounded-4xl p-1.5 px-4 font-medium hover:bg-[#15803d] xl:p-2 xl:px-5">
               Buy Now
             </button>
 
-            <header className="mb-10 lg:mb-0">
-              <nav className=" hidden lg:flex items-center justify-between text-white nav-border">
-                <div className="p-5  border px-20">
-                  <Image src={logo} alt="logo" />
+            <header className="mb-10 xl:mb-0">
+              <nav className=" hidden lg:flex items-center lg:p-4  xl:p-0 justify-between text-white nav-border">
+                <div className="p-5 lg:p-0 lg:px-5 xl:py-4 xl:border-r xl:border-[#8b770577] lg:border-transparent  px-20">
+                  <Image className="lg:w-[10vw]"  src={logo} alt="logo" />
                 </div>
-                <ul className="hidden lg:flex items-center gap-10 link p-5  border px-20 justify-center font-medium">
+                <ul className="hidden lg:flex items-center gap-10  p-5 lg:p-0 lg:px-5  px-20 justify-center font-medium">
                   <li
                     onClick={() => setdot(0)}
                     className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
@@ -308,7 +308,7 @@ export default function page() {
                   </li>
                 </ul>
 
-                <ul className="flex items-center p-5  gap-5 px-20">
+                <ul className="flex items-center xl:link1 xl:border-l xl:py-4 xl:border-[#8b770577] p-5 lg:p-0 lg:px-5  gap-5 px-20">
                   <li className=" relative">
                     <svg
                     onClick={search}
@@ -523,7 +523,7 @@ export default function page() {
               </section>
             </header>
 
-            <section className="lg:py-30 py-20 px-2 lg:px-0">
+            <section className="lg:py-30 py-20 md:py-30 px-2 lg:px-0">
               <div className="flex justify-start items-center">
                 <div className=" flex-col hidden   items-center gap-10 lg:flex">
                   <div className="flex  bg-transparent">
@@ -571,7 +571,7 @@ export default function page() {
                   </span>
                 </div>
 
-                <div className="mr-auto max-w-[630px] flex flex-col gap-2 lg:gap-5">
+                <div className="mr-auto max-w-[630px] md:px-10 md:gap-5 flex flex-col gap-2 lg:gap-5">
                   <div>
                     <span className="flex gap-2 items-center">
                       <span className="flex flex-col items-center gap-1 lg:gap-2 list-none px-3 border-dotted border-r-2 border-[gray]">
@@ -582,7 +582,7 @@ export default function page() {
                             alt="onion"
                           />
                           <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[#209e2e] rounded-full">
-                            2
+                            1
                           </span>
                         </li>
                         <p className="text-white lg:text-[15px] text-[10px] font-medium">
@@ -614,7 +614,7 @@ export default function page() {
                             alt="onion"
                           />
                           <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[#209e2e] rounded-full">
-                            2
+                            3
                           </span>
                         </li>
                         <p className="text-white lg:text-[15px] text-[10px] font-medium">
@@ -624,7 +624,7 @@ export default function page() {
                     </span>
                   </div>
 
-                  <h1 className="text-white lg:text-[55px] text-[26px] font-bold">
+                  <h1 className="text-white lg:text-[37px] xl:text-[40px] xl:font-extrabold xl:leading-15 text-[26px] font-bold">
                     Vegetable and fruits are Good for Health
                   </h1>
                   <p className="text-white">
@@ -667,8 +667,8 @@ export default function page() {
           </div>
         </section>
         {showside && (
-          <section className="top-0 bg-[#000000c0] h-[100vh] fixed w-[100vw] z-10 transition">
-            <div className="bg-white slideIn w-[30vw] absolute right-0  h-[100vh] overflow-y-scroll  p-10 flex flex-col gap-10">
+          <section className="top-0 bg-[#000000c0] h-[100vh] fixed w-[100vw] z-30 transition">
+            <div className="bg-white slideIn w-[30vw] xl:w-[30vw] lg:w-[50vw] absolute right-0  h-[100vh] overflow-y-scroll  p-10 flex flex-col gap-10">
               <div className="flex justify-end">
                 <svg
                   onClick={() => setshowside(false)}
@@ -693,7 +693,7 @@ export default function page() {
                 </p>
               </span>
 
-              <span className="flex flex-col gap-5">
+              <span className="flex flex-col gap-5 items-center justify-center">
                 <h1 className="font-[700] text-[24px] text-[#333333]">
                   Instagram
                 </h1>
@@ -791,7 +791,7 @@ export default function page() {
               <p
                 className={`${
                   mode ? "text-white" : "text-[#7a7e9a]"
-                } "text-[16px] font-[400] leading-[1.8] lg:max-w-[605px] m-auto`}
+                } "text-[16px] font-[400] leading-[1.8] md:max-w-[605px] lg:max-w-[605px] m-auto`}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut laboreonsectetur adipiscinet
@@ -799,11 +799,11 @@ export default function page() {
               </p>
             </span>
 
-            <div className="flex flex-wrap justify-center items-center lg:gap-10 gap-5 mt-[30px] lg:mt-[50px]">
+            <div className="flex flex-wrap  md:flex md:flex-wrap justify-center items-center lg:gap-10 gap-5 mt-[30px] lg:mt-[50px]">
               <div
                 className={`${
                   mode ? "bg-[#0e0e0e] text-white" : "bg-[#d2ecd4]"
-                } lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10`}
+                } lg:w-[28vw] md:w-[45vw] w-[90vw] p-8 relative lg:px-10 lg:py-10`}
               >
                 <span>
                   <p className={`${mode}text-[#209e2e] text-[14px]`}>
@@ -831,7 +831,7 @@ export default function page() {
                   alt="shape1"
                 />
               </div>
-              <div className="bg-[#fdedce] lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10">
+              <div className="bg-[#fdedce] lg:w-[28vw] md:w-[45vw] w-[90vw] p-8 relative lg:px-10 lg:py-10">
                 <span>
                   <p className="text-[#209e2e] text-[14px]"> Breed Cow</p>
                   <h3 className="text-[25px] text-[#5a5959] font-extrabold leading-[1.2] my-2">
@@ -855,7 +855,7 @@ export default function page() {
                   alt="shape1"
                 />
               </div>
-              <div className="bg-[#d2ecd4] lg:w-[28vw] w-[90vw] p-8 relative lg:px-10 lg:py-10">
+              <div className="bg-[#d2ecd4] lg:w-[28vw] md:w-[45vw] w-[90vw] p-8 relative lg:px-10 lg:py-10">
                 <span>
                   <p className="text-[#209e2e] text-[14px]"> Fresh fish</p>
                   <h3 className="text-[25px] text-[#5a5959] font-extrabold leading-[1.2] my-2">
@@ -883,23 +883,23 @@ export default function page() {
           </div>
         </section>
 
-        <section className="bg-[#f4faf4]">
+        <section className="bg-[#f4faf4] ">
           <Image src={rag1} alt="rag1" />
 
-          <div className="pb-10">
+          <div className="pb-10 ">
             <div>
-              <div className="lg:flex items-center lg:w-[80vw] m-auto my-[30px] pl-1">
+              <div className="lg:flex items-center lg:w-[90vw] xl:w-[80vw] m-auto my-[30px] pl-1 md:w-[90vw] md:py-10 md:m-auto md:pt-10">
                 <span className="w-[60vw]">
                   <span className="text-[#209e2e] text-[14px] lg:text-[15px] block mb-[8px]">
                     KNOW ABOUT US
                   </span>
-                  <h2 className="text-[25px] lg:text-[38px] font-[700] text-[#333333]">
+                  <h2 className="text-[25px] lg:text-[30px] xl:text-[38px] font-[700] text-[#333333]">
                     The territory might be safe is vegetable easy to get
                   </h2>
                 </span>
 
                 <span className="lg:border-l-1 border-[#7a7e9a]">
-                  <p className="leading-[1.8]  lg:pl-10 text-[#7a7e9a] font-[400] text-[16px] lg:max-w-[600px]">
+                  <p className="leading-[1.8]  xl:text-[14px] lg:pl-10 text-[#7a7e9a] font-[400] text-[16px] lg:max-w-[600px]">
                     There are many variations of passages of Lorem Ipsum
                     available, but the majority have suffered alteration in some
                     form, by injected humour, or randomised words which don't
@@ -908,26 +908,39 @@ export default function page() {
                 </span>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-10 justify-center items-center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div className="flex flex-col lg:flex-row md:gap-0 gap-10 xl:gap-10 lg:gap-5 justify-center items-center">
                 <Image
-                  className="w-[90vw] lg:w-[40vw]"
+                  className="w-[90vw] lg:w-[43vw] xl:w-[40vw]"
                   src={about}
                   alt="seller"
                 />
 
-                <div className="lg:w-[40vw] p-2  lg:p-0">
-                  <div className="flex flex-col gap-3 lg:items-center lg:justify-center ">
+                <div className="xl:w-[40vw] lg:w-[50vw] p-2 xl:p-0  lg:p-0">
+                  <div className="flex flex-col gap-3 xl:items-center lg:justify-center ">
                     <div
                  /*      ref={scrollRef} */
-                      className="flex lg:w-[40vw] w-[95vw] justify-center items-center gap-3 overflow-x-scroll no-scrollbar"
+                           className="flex lg:w-[50vw] xl:w-[40vw] w-[95vw] md:w-[90vw] lg:justify-start justify-center items-center gap-3 overflow-x-scroll no-scrollbar"
                     >
                   <div>
                         <Image
-                          className="w-[90vw] lg:w-[20vw] h-auto relative top-2"
+                   className="w-[90vw]  md:w-[45vw]  xl:w-[20vw] h-auto relative top-2"
                           src={about2}
                           alt="seller"
                         />
-                        <div className="w-[90vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                        <div className="w-[90vw]  md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
                           <li className="flex gap-2 items-center">
                             <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                             <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
@@ -941,11 +954,11 @@ export default function page() {
                       </div>
                       <div>
                         <Image
-                          className="w-[90vw] lg:w-[20vw] h-auto relative top-2"
+                          className="w-[90vw] md:w-[45vw]  lg:w-[20vw] h-auto relative top-2"
                           src={about2}
                           alt="seller"
                         />
-                        <div className="w-[90vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                           <div className="w-[90vw]  md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
                           <li className="flex gap-2 items-center">
                             <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                             <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
@@ -959,11 +972,11 @@ export default function page() {
                       </div>
                       <div>
                         <Image
-                          className="w-[90vw] lg:w-[20vw] h-auto relative top-2"
+                          className="w-[90vw]  md:w-[45vw]  lg:w-[20vw] h-auto relative top-2"
                           src={about3}
                           alt="seller"
                         />
-                        <div className="w-[90vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
+                        <div className="w-[90vw]  md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
                           <li className="flex gap-2 items-center">
                             <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                             <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
@@ -1045,12 +1058,13 @@ export default function page() {
                     </ul>
                   </div>
                 </div>
-              </div>
+          </div>
             </div>
           </div>
+
             
           <div className="flex justify-center items-center">
-            <ul className="flex flex-col lg:gap-0 gap-5 lg:flex-row items-center justify-center w-[90vw] lg:w-[85vw] bg-[#ffffff] rounded-[5px] relative top-20 py-10 fun-facts-content-area">
+            <ul className="flex flex-col md:grid md:grid-cols-2 xl:flex lg:flex lg:gap-0 gap-5 lg:flex-row items-center justify-center w-[90vw] lg:w-[85vw] bg-[#ffffff] rounded-[5px] relative top-20 py-10 fun-facts-content-area">
               <li className="flex  lg:w-[25%] border-dashed lg:border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e]  font-[300] text-[50px]">
                 <span>120+</span>
                 <p className="text-[16px] font-[400]">Category Vegetable</p>
@@ -1081,7 +1095,7 @@ export default function page() {
           <p
             className={`${
               mode ? "text-white" : "text-[#7a7e9a]"
-            } "text-[16px] font-[400] leading-[1.8] text-center lg:max-w-[605px] m-auto`}
+            } "text-[16px] font-[400] leading-[1.8] text-center md:max-w-[605px] lg:max-w-[605px] m-auto`}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut laboreonsectetur adipiscinet dolore.
@@ -1115,7 +1129,7 @@ export default function page() {
           </span>
 
           <div>
-            {activeIndex === 0 && (
+             {activeIndex === 0 && (
               <div className="flex lg:flex-row flex-col items-center justify-center  gap-5 slideDown">
                 <div className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed w-[90vw]  lg:w-[20vw]  text-center border-[#209e2e]  hover:bg-white transition">
                   <div className=" flex flex-col gap-3 text-center items-center">
@@ -2243,7 +2257,7 @@ export default function page() {
             <div className="flex items-center justify-center relative bg-[#fefaf0] py-20">
               <Image className="absolute left-0 hidden lg:block" src={more9} alt="morerag2" />
               <div className="w-[80vw] overflow-hidden border-b border-[#209e2e] border-dashed">
-                <div className="flex resanimate-slide-x  lg:animate-slide-x">
+                <div className="flex  lg:animate-slide-x">
                   <Image
                     className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
                     src={more1}
@@ -2342,12 +2356,12 @@ export default function page() {
           <div>
             <Image src={morerag2} alt="morerag1" />
 
-            <div className="faq p-2 lg:py-20 flex lg:flex-row gap-5 lg:gap-0 flex-col items-center justify-center">
+            <div className="faq p-2 md:items-start md:justify-start xl:items-center xl:justify-center lg:justify-center lg:items-center lg:py-20 flex lg:flex-row gap-5 lg:gap-0 flex-col items-center justify-center">
               <div className="lg:w-[40vw] flex flex-col gap-2">
                 <p className="text-[#209e2e] font-[400] text-[14px]">
                   frequently questions
                 </p>
-                <h2 className="text-[27px] lg:text-[38px] font-[700] text-[#333333]">
+                <h2 className="text-[27px] lg:text-[30px] xl:text-[38px] font-[700] text-[#333333]">
                   The question a lot time we get from our customer
                 </h2>
                 <button className="bg-[#209e2e] lg:mt-5 w-fit px-5  flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-[#5c5b5a] hover:text-white">
@@ -2370,20 +2384,20 @@ export default function page() {
                     className="list-none flex items-center  cursor-pointer"
                   >
                     <svg
-                      className="w-[8vw] lg:w-[2vw] mr-[5px] text-[#209e2e]"
+                      className="w-[8vw] md:w-[5vw] lg:w-[3vw] xl:w-[2vw] mr-[5px] text-[#209e2e]"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
                       <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                     </svg>
-                    <p className="text-[#696d8b] font-extrabold text-[15px] lg:text-[20px]">
+                    <p className="text-[#696d8b] font-extrabold text-[15px] md:text-[20px] lg:text-[15px] xl:text-[20px]">
                       Why will we buy products from this company?
                     </p>
                   </li>
 
                   {faq === 0 && (
-                    <p className="text-[14px] lg:text-[16px] faq font-[400] text-[#7a7e9a] leading-[1.8] pt-[10px]">
+                    <p className="text-[14px] md:text-[16px] lg:text-[15] xl:text-[16px] faq font-[400] text-[#7a7e9a] leading-[1.8] pt-[10px]">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed dorem ipsum dolor sit amet, consectetur adipiscing.
                     </p>
@@ -2395,19 +2409,19 @@ export default function page() {
                     className="list-none flex items-center cursor-pointer"
                   >
                     <svg
-                      className="w-[8vw] lg:w-[2vw] mr-[5px] text-[#209e2e]"
+                        className="w-[8vw] md:w-[5vw] lg:w-[3vw] xl:w-[2vw] mr-[5px] text-[#209e2e]"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
                       <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                     </svg>
-                    <p className="text-[#696d8b] font-extrabold text-[15px] lg:text-[20px]">
+                    <p className="text-[#696d8b] font-extrabold text-[15px] md:text-[20px] lg:text-[15px] xl:text-[20px]">
                       Is it possible to have natural products?
                     </p>
                   </li>
                   {faq === 1 && (
-                    <p className="text-[14px] lg:text-[16px] faq font-[400] text-[#7a7e9a] leading-[1.8] pt-[10px]">
+                    <p className="text-[14px] md:text-[16px] lg:text-[15] xl:text-[16px] faq font-[400] text-[#7a7e9a] leading-[1.8] pt-[10px]">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed dorem ipsum dolor sit amet, consectetur adipiscing.
                     </p>
@@ -2420,11 +2434,11 @@ export default function page() {
         </section>
 
         <section className="flex lg:flex-row flex-col  relative mt-15 lg:mt-0">
-          <div className="lg:w-[50vw] p-2 lg:p-0 flex flex-col gap-3 bg-transparent relative lg:left-30">
+          <div className="xl:w-[50vw] lg:w-[60vw] p-2 lg:p-0 flex flex-col gap-3 bg-transparent relative lg:left-30">
             <p className="text-[#209e2e]  lg:text-[15px] font-[400] text-[14px]">
               A SUMMARY
             </p>
-            <h2 className="text-[25px] lg:text-[38px]  font-[700] text-[#333333]">
+            <h2 className="text-[25px] lg:text-[30px] xl:text-[38px]  font-[700] text-[#333333]">
               A brief what we use how use the impression help you
             </h2>
             <p
@@ -2462,7 +2476,7 @@ export default function page() {
           <div className="relative flex">
             <Image src={agree} alt="agree" />
             <Image
-              className="absolute right-0 w-[1000vw] lg:w-[40vw]"
+              className="absolute right-0 w-[100vw] md:w-[70vw] lg:w-[40vw]"
               src={agree1}
               alt="agree"
             />
@@ -2549,10 +2563,10 @@ export default function page() {
           <div className="flex pt-[70px] pb-[70px] items-center">
             <Image className="w-[50vw] hidden lg:block" src={deal2} alt="deal1" />
             <div className="text-center flex flex-col items-center justify-center">
-              <h2 className="text-[#80b500] text-[25px] lg:text-[30px] font-[700] mb-[15px] italic">
+              <h2 className="text-[#80b500] text-[25px] xl:text-[30px] font-[700] mb-[15px] italic">
                 Todays Hot Deals
               </h2>
-              <h1 className="text-[#071c1f] text-[25px] lg:text-[50px] font-[700] mb-[15px]">
+              <h1 className="text-[#071c1f] text-[25px] xl:text-[50px] font-[700] mb-[15px]">
                 Original Stock Honey Combo Package
               </h1>
               <ul className="flex items-center gap-5 justify-center">

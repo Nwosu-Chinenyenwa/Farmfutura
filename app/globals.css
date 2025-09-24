@@ -192,7 +192,10 @@ animation-duration: 5s;
 
 
 .link{
-  border-right: rgba(139, 119, 5, 0.466) 1.5px solid;
+  border-right: #8b770577 1.5px solid;
+}
+.link1{
+  border-left: rgba(139, 119, 5, 0.466) 1.5px solid;
 }
 
 .transition{

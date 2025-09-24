@@ -37,7 +37,7 @@ export default function Search() {
 
   return (
     <>
-      <form className="w-[70vw] h-[40px] flex  text-[#333333] border-1 border-[#209e2e] items-center justify-center">
+      <form className="lg:w-[20vw]  h-[40px] p-3 flex  text-[#333333] border-1 border-[#209e2e] items-center justify-center">
         <input
           className=" outline-0 p-1 placeholder:text-[#616161]"
           ref={inputRef}
