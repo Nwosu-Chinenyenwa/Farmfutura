@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import logo from "../../public/img/logo-two.png";
 import Image from "next/image";
@@ -18,7 +20,7 @@ export default function Nav() {
   const showsideView = () => setshowside(!showside);
   return (
     <header className="mb-10 lg:mb-0">
-      <nav className="w-[100vw] fixed bg-[#ffffff] lg:p-4  shadow-md hidden lg:flex items-center justify-between text-[#333333] z-30 ">
+      <nav className="w-[100vw] fixed bg-[#ffffff] lg:p-4  shadow-md lg:flex items-center justify-between text-[#333333] z-30 ">
            <div className="p-5 lg:p-0 lg:px-5 lg:border-transparent  xl:border px-20">
           <Image className="lg:w-[10vw]" src={logo} alt="logo" />
         </div>

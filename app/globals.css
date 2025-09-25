@@ -7,8 +7,11 @@ body {
   overflow-x: hidden;
 }
 
+
+
 .rajdhani-light {
   font-family: "Rajdhani", sans-serif;}
+  
 
 
 /* loader */
@@ -424,6 +427,13 @@ animation-duration: 5s;
 
 .Categories{
     background-image: url(../public/asset/cultivation-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.pagetitle{
+    background-image: url(../public/img/page-title-bg.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

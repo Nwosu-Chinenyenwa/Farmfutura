@@ -1,12 +1,14 @@
 import React from "react";
+import payment from "../../public/img/payment-4_370x.avif";
+import Image from "next/image";
 
 export default function Footer() {
-    const year = new Date().getFullYear();
+  const year = new Date().getFullYear();
   return (
     <footer>
       <section className="bg-[#000000d6] pt-[50px]  lg:pt-[100px] flex flex-col items-center justify-center">
         <div className="w-[90vw] flex flex-col items-center justify-center">
-          <div className="text-white  flex-col lg:flex lg:flex-row m-auto border-b-1 border-dashed pb-[50px] border-[#209e2e] items-center justify-center gap-10">
+          <div className="text-white  flex-col lg:flex lg:flex-row m-auto border-b-1 border-dashed pb-[50px] border-[#209e2e] justify-center gap-10">
             <ul className="lg:w-[25%] max-w-[100%]">
               <h3 className="text-[20px] font-bold mb-[30px]">About Trifles</h3>
               <p className="leading-[25px] text-[16px] font-[400] mb-[18px]">
@@ -132,18 +134,33 @@ export default function Footer() {
                     <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                   </svg>
                 </button>
+
+                <div>
+                  <h5 className="mt-[30px] rajdhani-light  text-[18px] font-[700] text-white mb-2">
+                   We Accept
+                  </h5>
+                  <Image
+                    className="max-w-[100%] w-[100%] h-[100%]"
+                    src={payment}
+                    alt="payments"
+                  />
+                </div>
               </ul>
             </ul>
           </div>
 
           <div className="lg:flex text-center  justify-between text-[#ffffff] w-[90vw] py-10 text-[14px] font-[600]">
             <p>
-            Copyright @ {year} Trifles. All Rights Reserved by{" "}
-            <a className="font-[900]" href="">EnvyTheme</a>
+              Copyright @ {year} Trifles. All Rights Reserved by{" "}
+              <a className="font-[900]" href="">
+                EnvyTheme
+              </a>
             </p>
             <ul className="flex gap-3 mt-3 lg:mt-0 text-center items-center justify-center">
-                <li className="border-r-2 border-[#209e2e] px-3 cursor-pointer">Terms & Conditions</li>
-                <li className="cursor-pointer ">Privacy Policy</li>
+              <li className="border-r-2 border-[#209e2e] px-3 cursor-pointer">
+                Terms & Conditions
+              </li>
+              <li className="cursor-pointer ">Privacy Policy</li>
             </ul>
           </div>
         </div>
