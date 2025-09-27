@@ -14,7 +14,7 @@ import sub5 from "../../public/img/5.jpg";
 import sub6 from "../../public/img/6.jpg";
 import sub7 from "../../public/img/7.jpg";
 import sub8 from "../../public/img/8.jpg";
-import { usePathname } from "next/navigation"; 
+import { usePathname } from "next/navigation";
 import Nav from "./Nav";
 
 export default function AllNav() {
@@ -55,7 +55,6 @@ export default function AllNav() {
 
     return () => window.removeEventListener("scroll", Scroll);
   }, []);
-  
 
   return (
     <>
@@ -156,16 +155,18 @@ export default function AllNav() {
               >
                 News
               </li>
-              <li
-                onClick={() => setdot(3)}
-                className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
-                  dot === 3
-                    ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
-                    : ""
-                }`}
-              >
-                Contact
-              </li>
+              <Link href={"/pages/Contact"}>
+                <li
+                  onClick={() => setdot(3)}
+                  className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
+                    dot === 3
+                      ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
+                      : ""
+                  }`}
+                >
+                  Contact
+                </li>
+              </Link>
             </ul>
 
             <ul className="flex items-center xl:link1 xl:border-l xl:py-4 xl:border-[#8b770577] p-5 lg:p-0 lg:px-5  gap-5 px-20">
