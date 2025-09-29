@@ -35,24 +35,7 @@ export default function Nav() {
           <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
             <span className="flex items-center">
               <span>Services</span>
-              <svg
-                className="w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
-              </svg>
             </span>
-
-            <ul className="opacity-0 shadow-sm absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-              <li className="block hover:text-[#82b440] transition-all hover:ml-1 ">
-                Services
-              </li>
-              <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                Services Details
-              </li>
-            </ul>
           </li>
           <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
             <span className="flex items-center">
@@ -80,7 +63,7 @@ export default function Nav() {
             </ul>
           </li>
           <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-            News
+            Deals
           </li>
           <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
             Contact

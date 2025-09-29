@@ -18,7 +18,6 @@ import { usePathname } from "next/navigation";
 import Nav from "./Nav";
 
 export default function AllNav() {
-  const [dot, setdot] = useState(0);
   const [view, setview] = useState(false);
   const [showside, setshowside] = useState(false);
   const [hamburga, sethamburga] = useState(false);
@@ -76,11 +75,7 @@ export default function AllNav() {
               <Link href={"/pages/Home"}>
                 <li
                   onClick={() => setdot(0)}
-                  className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
-                    dot === 0
-                      ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
-                      : ""
-                  }`}
+                  className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100"
                 >
                   Home
                 </li>
@@ -89,37 +84,11 @@ export default function AllNav() {
               <Link href={"/pages/About"}>
                 <li
                   onClick={() => setdot(1)}
-                  className={`relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e] ${
-                    dot === 1
-                      ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
-                      : ""
-                  }`}
+                  className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]"
                 >
                   About
                 </li>
               </Link>
-              <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-                <span className="flex items-center">
-                  <span>Services</span>
-                  <svg
-                    className="w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
-                  </svg>
-                </span>
-
-                <ul className="opacity-0 absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-                  <li className="block hover:text-[#82b440] transition-all hover:ml-1 ">
-                    Services
-                  </li>
-                  <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                    Services Details
-                  </li>
-                </ul>
-              </li>
               <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
                 <span className="flex items-center">
                   <span>Shop</span>
@@ -134,9 +103,11 @@ export default function AllNav() {
                 </span>
 
                 <ul className="opacity-0 absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-                  <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                    Shop
-                  </li>
+                  <Link href={"/pages/Shop"}>
+                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                      Shop
+                    </li>
+                  </Link>
                   <li className="block hover:text-[#82b440] transition-all hover:ml-1">
                     Cart
                   </li>
@@ -147,26 +118,45 @@ export default function AllNav() {
               </li>
               <li
                 onClick={() => setdot(2)}
-                className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
-                  dot === 2
-                    ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
-                    : ""
-                }`}
+                className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100"
               >
-                News
+                Deals
               </li>
               <Link href={"/pages/Contact"}>
                 <li
                   onClick={() => setdot(3)}
-                  className={`relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100${
-                    dot === 3
-                      ? "after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-100 text-[#209e2e]"
-                      : ""
-                  }`}
+                  className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100"
                 >
                   Contact
                 </li>
               </Link>
+
+              <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                <span className="flex items-center">
+                  <span>Login</span>
+                  <svg
+                    className="w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                  </svg>
+                </span>
+
+                <ul className="opacity-0 absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
+                  <Link href={"/pages/Login"}>
+                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                      Login
+                    </li>
+                  </Link>
+                  <Link href={"/pages/Signup"}>
+                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                      SignUp
+                    </li>
+                  </Link>
+                </ul>
+              </li>
             </ul>
 
             <ul className="flex items-center xl:link1 xl:border-l xl:py-4 xl:border-[#8b770577] p-5 lg:p-0 lg:px-5  gap-5 px-20">
@@ -277,73 +267,59 @@ export default function AllNav() {
             {hamburga && (
               <section className="  justify-center relative flex items-center ">
                 <div className="justify-center fixed  w-[100vw] bg-[#00000087] h-[200vh]  flex items-center shadow-sm">
-                  <ul className=" w-[90vw] bg-white slideMenu h-[40vh] relative top-60 overflow-y-scroll  bottom-3">
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">Home</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M20 20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20ZM12 15C13.3807 15 14.5 13.8807 14.5 12.5C14.5 11.1193 13.3807 9.99998 12 9.99998C10.6193 9.99998 9.5 11.1193 9.5 12.5C9.5 13.8807 10.6193 15 12 15Z"></path>
-                      </svg>
-                    </li>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">About</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M10.9042 2.10025L20.8037 3.51446L22.2179 13.414L13.0255 22.6063C12.635 22.9969 12.0019 22.9969 11.6113 22.6063L1.71184 12.7069C1.32131 12.3163 1.32131 11.6832 1.71184 11.2926L10.9042 2.10025ZM11.6113 4.22157L3.83316 11.9997L12.3184 20.485L20.0966 12.7069L19.036 5.28223L11.6113 4.22157ZM13.7327 10.5855C12.9516 9.80448 12.9516 8.53815 13.7327 7.7571C14.5137 6.97606 15.78 6.97606 16.5611 7.7571C17.3421 8.53815 17.3421 9.80448 16.5611 10.5855C15.78 11.3666 14.5137 11.3666 13.7327 10.5855Z"></path>
-                      </svg>
-                    </li>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">Services</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M11 19V9H4V19H11ZM11 7V4C11 3.44772 11.4477 3 12 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V8C2 7.44772 2.44772 7 3 7H11ZM13 5V19H20V5H13ZM5 16H10V18H5V16ZM14 16H19V18H14V16ZM14 13H19V15H14V13ZM14 10H19V12H14V10ZM5 13H10V15H5V13Z"></path>
-                      </svg>
-                    </li>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]"> Services Details</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M11 7V4C11 3.44772 11.4477 3 12 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V8C2 7.44772 2.44772 7 3 7H11ZM5 16V18H10V16H5ZM14 16V18H19V16H14ZM14 13V15H19V13H14ZM14 10V12H19V10H14ZM5 13V15H10V13H5Z"></path>
-                      </svg>
-                    </li>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">Shop</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M12.0049 0.999695C14.7663 0.999695 17.0049 3.23827 17.0049 5.99969V7.99969H20.0049C20.5572 7.99969 21.0049 8.44741 21.0049 8.99969V20.9997C21.0049 21.552 20.5572 21.9997 20.0049 21.9997H4.00488C3.4526 21.9997 3.00488 21.552 3.00488 20.9997V8.99969C3.00488 8.44741 3.4526 7.99969 4.00488 7.99969H7.00488V5.99969C7.00488 3.23827 9.24346 0.999695 12.0049 0.999695ZM17.0049 10.9997H15.0049V11.9997C15.0049 12.552 15.4526 12.9997 16.0049 12.9997C16.5177 12.9997 16.9404 12.6137 16.9982 12.1163L17.0049 11.9997V10.9997ZM9.00488 10.9997H7.00488V11.9997C7.00488 12.552 7.4526 12.9997 8.00488 12.9997C8.51772 12.9997 8.94039 12.6137 8.99815 12.1163L9.00488 11.9997V10.9997ZM12.0049 2.99969C10.4072 2.99969 9.10122 4.24861 9.00998 5.82342L9.00488 5.99969V7.99969H15.0049V5.99969C15.0049 4.40201 13.756 3.09603 12.1812 3.00479L12.0049 2.99969Z"></path>
-                      </svg>
-                    </li>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">Cart</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M4.00436 6.41686L0.761719 3.17422L2.17593 1.76001L5.41857 5.00265H20.6603C21.2126 5.00265 21.6603 5.45037 21.6603 6.00265C21.6603 6.09997 21.6461 6.19678 21.6182 6.29L19.2182 14.29C19.0913 14.713 18.7019 15.0027 18.2603 15.0027H6.00436V17.0027H17.0044V19.0027H5.00436C4.45207 19.0027 4.00436 18.5549 4.00436 18.0027V6.41686ZM5.50436 23.0027C4.67593 23.0027 4.00436 22.3311 4.00436 21.5027C4.00436 20.6742 4.67593 20.0027 5.50436 20.0027C6.33279 20.0027 7.00436 20.6742 7.00436 21.5027C7.00436 22.3311 6.33279 23.0027 5.50436 23.0027ZM17.5044 23.0027C16.6759 23.0027 16.0044 22.3311 16.0044 21.5027C16.0044 20.6742 16.6759 20.0027 17.5044 20.0027C18.3328 20.0027 19.0044 20.6742 19.0044 21.5027C19.0044 22.3311 18.3328 23.0027 17.5044 23.0027Z"></path>
-                      </svg>
-                    </li>
+                  <ul className=" w-[90vw] bg-white slideMenu h-fit relative top-70 overflow-y-scroll  bottom-3">
+                    <Link href={"/pages/Home"}>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">Home</p>
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M20 20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20ZM12 15C13.3807 15 14.5 13.8807 14.5 12.5C14.5 11.1193 13.3807 9.99998 12 9.99998C10.6193 9.99998 9.5 11.1193 9.5 12.5C9.5 13.8807 10.6193 15 12 15Z"></path>
+                        </svg>
+                      </li>
+                    </Link>
+                    <Link href={"/pages/About"}>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">About</p>
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M10.9042 2.10025L20.8037 3.51446L22.2179 13.414L13.0255 22.6063C12.635 22.9969 12.0019 22.9969 11.6113 22.6063L1.71184 12.7069C1.32131 12.3163 1.32131 11.6832 1.71184 11.2926L10.9042 2.10025ZM11.6113 4.22157L3.83316 11.9997L12.3184 20.485L20.0966 12.7069L19.036 5.28223L11.6113 4.22157ZM13.7327 10.5855C12.9516 9.80448 12.9516 8.53815 13.7327 7.7571C14.5137 6.97606 15.78 6.97606 16.5611 7.7571C17.3421 8.53815 17.3421 9.80448 16.5611 10.5855C15.78 11.3666 14.5137 11.3666 13.7327 10.5855Z"></path>
+                        </svg>
+                      </li>
+                    </Link>
+                    <Link href={"/pages/Shop"}>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">Shop</p>
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M12.0049 0.999695C14.7663 0.999695 17.0049 3.23827 17.0049 5.99969V7.99969H20.0049C20.5572 7.99969 21.0049 8.44741 21.0049 8.99969V20.9997C21.0049 21.552 20.5572 21.9997 20.0049 21.9997H4.00488C3.4526 21.9997 3.00488 21.552 3.00488 20.9997V8.99969C3.00488 8.44741 3.4526 7.99969 4.00488 7.99969H7.00488V5.99969C7.00488 3.23827 9.24346 0.999695 12.0049 0.999695ZM17.0049 10.9997H15.0049V11.9997C15.0049 12.552 15.4526 12.9997 16.0049 12.9997C16.5177 12.9997 16.9404 12.6137 16.9982 12.1163L17.0049 11.9997V10.9997ZM9.00488 10.9997H7.00488V11.9997C7.00488 12.552 7.4526 12.9997 8.00488 12.9997C8.51772 12.9997 8.94039 12.6137 8.99815 12.1163L9.00488 11.9997V10.9997ZM12.0049 2.99969C10.4072 2.99969 9.10122 4.24861 9.00998 5.82342L9.00488 5.99969V7.99969H15.0049V5.99969C15.0049 4.40201 13.756 3.09603 12.1812 3.00479L12.0049 2.99969Z"></path>
+                        </svg>
+                      </li>
+                    </Link>
+                    <Link href={"/pages/Cart"}>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">Cart</p>
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M4.00436 6.41686L0.761719 3.17422L2.17593 1.76001L5.41857 5.00265H20.6603C21.2126 5.00265 21.6603 5.45037 21.6603 6.00265C21.6603 6.09997 21.6461 6.19678 21.6182 6.29L19.2182 14.29C19.0913 14.713 18.7019 15.0027 18.2603 15.0027H6.00436V17.0027H17.0044V19.0027H5.00436C4.45207 19.0027 4.00436 18.5549 4.00436 18.0027V6.41686ZM5.50436 23.0027C4.67593 23.0027 4.00436 22.3311 4.00436 21.5027C4.00436 20.6742 4.67593 20.0027 5.50436 20.0027C6.33279 20.0027 7.00436 20.6742 7.00436 21.5027C7.00436 22.3311 6.33279 23.0027 5.50436 23.0027ZM17.5044 23.0027C16.6759 23.0027 16.0044 22.3311 16.0044 21.5027C16.0044 20.6742 16.6759 20.0027 17.5044 20.0027C18.3328 20.0027 19.0044 20.6742 19.0044 21.5027C19.0044 22.3311 18.3328 23.0027 17.5044 23.0027Z"></path>
+                        </svg>
+                      </li>
+                    </Link>
                     <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                       <p className="text-[#82b440]">Checkout</p>
                       <svg
@@ -356,7 +332,7 @@ export default function AllNav() {
                       </svg>
                     </li>
                     <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">News</p>
+                      <p className="text-[#82b440]">Deals</p>
                       <svg
                         className="w-6 text-[gray]"
                         xmlns="http://www.w3.org/2000/svg"
@@ -366,17 +342,33 @@ export default function AllNav() {
                         <path d="M3 3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H3ZM6 7H12V13H6V7ZM8 9V11H10V9H8ZM18 9H14V7H18V9ZM14 13V11H18V13H14ZM6 17V15L18 15V17L6 17Z"></path>
                       </svg>
                     </li>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">Contact</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M4 2C3.44772 2 3 2.44772 3 3V5H5V7H2V9H5V11H2V13H5V15H2V17H5V19H3V21C3 21.5523 3.44772 22 4 22H20C20.5523 22 21 21.5523 21 21V3C21 2.44772 20.5523 2 20 2H4ZM9 16C9 14.3431 10.3431 13 12 13C13.6569 13 15 14.3431 15 16H9ZM12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12Z"></path>
-                      </svg>
-                    </li>
+                    <Link href={"/pages/Contact"}>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">Contact</p>
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M4 2C3.44772 2 3 2.44772 3 3V5H5V7H2V9H5V11H2V13H5V15H2V17H5V19H3V21C3 21.5523 3.44772 22 4 22H20C20.5523 22 21 21.5523 21 21V3C21 2.44772 20.5523 2 20 2H4ZM9 16C9 14.3431 10.3431 13 12 13C13.6569 13 15 14.3431 15 16H9ZM12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12Z"></path>
+                        </svg>
+                      </li>
+                    </Link>
+                    <Link href={"/pages/Signup"}>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">SignUp</p>
+
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M4 15H6V20H18V4H6V9H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V15ZM10 11V8L15 12L10 16V13H2V11H10Z"></path>
+                        </svg>
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </section>
