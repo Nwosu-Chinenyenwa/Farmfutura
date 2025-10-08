@@ -9,7 +9,7 @@ const loader = useState(false)
 const route = useRouter();
 
 useEffect(() => {
-  const loader = setInterval(() => route.push("/pages/Home"), 5000)
+  const loader = setInterval(() => route.push("/pages/Home"), 3000)
   return () => clearInterval(loader)
 },[])
   return (
