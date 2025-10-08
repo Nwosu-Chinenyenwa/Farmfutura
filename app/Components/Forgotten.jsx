@@ -9,7 +9,7 @@ import AllNav from "./AllNav";
 import Link from "next/link";
 
 
-export default function ForgotPassword() {
+export default function Forgotten() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 

@@ -1,8 +1,10 @@
+"use client"
+
 import React from 'react'
-import ForgotPassword from '@/app/Components/ForgotPassword'
+import Forgotten from '@/app/Components/Forgotten'
 
 export default function page() {
   return (
-    <ForgotPassword/>
+   <Forgotten/>
   )
 }

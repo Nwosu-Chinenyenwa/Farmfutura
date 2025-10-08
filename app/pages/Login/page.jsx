@@ -1,3 +1,5 @@
+"use client"
+
 import Login from '@/app/Components/Login'
 import React from 'react'
 
