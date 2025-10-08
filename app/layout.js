@@ -1,5 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import toast, { Toaster } from "react-hot-toast";
+import { CartProvider } from "./context/CartContext";
+import TabTitleWatcher from "./Components/TabTitleWatcher";
 
 export const metadata = {
   title: "Farmmerce Agriculture",
@@ -9,7 +12,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <meta name="google-site-verification" content="rszEqQis_kfUgJSnfECtDkudVyIW5GdWVkOhAAHmY7o" />
+      <head>
+        <title>Farmmerce Agriculture</title>
+      </head>
+      <body>
+        <CartProvider>
+          <TabTitleWatcher />
+          {children}
+        </CartProvider>{" "}
+        <Toaster />
+      </body>
     </html>
   );
 }

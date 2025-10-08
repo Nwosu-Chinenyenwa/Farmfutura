@@ -82,7 +82,7 @@ export default function Contact() {
                     type="text"
                     name="name"
                     placeholder="Name"
-                    className="w-full border-1 border-[#209e2e] rounded-md p-3 outline-none"
+                    className="w-full focus:border-2 border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
                 <div>
@@ -90,18 +90,18 @@ export default function Contact() {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="w-full  border-1 border-[#209e2e] rounded-md p-3 outline-none"
+                    className="w-full focus:border-2  border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid focus:border-2 grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <input
                     type="text"
                     name="phone"
                     placeholder="Phone"
-                    className="w-full  border-1 border-[#209e2e] rounded-md p-3 outline-none"
+                    className="w-full focus:border-2 border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
                 <div>
@@ -109,7 +109,7 @@ export default function Contact() {
                     type="text"
                     name="subject"
                     placeholder="Subject"
-                    className="w-full  border-1 border-[#209e2e] rounded-md p-3 outline-none"
+                    className="w-full focus:border-2 border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function Contact() {
                   name="message"
                   placeholder="Your Message"
                   rows="6"
-                  className="w-full  border-1 border-[#209e2e] rounded-md p-3 outline-none"
+                  className="w-full focus:border-2  border-1 border-[#209e2e] rounded-md p-3 outline-none"
                 ></textarea>
               </div>
 

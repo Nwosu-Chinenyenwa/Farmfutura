@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import logo from "../../public/img/logo-two.png";
@@ -12,6 +12,8 @@ import sub6 from "../../public/img/6.jpg";
 import sub7 from "../../public/img/7.jpg";
 import sub8 from "../../public/img/8.jpg";
 import Search from "./Search";
+import Link from "next/link";
+import Cart from "./Cart";
 
 export default function Nav() {
   const [view, setView] = useState(false);
@@ -21,22 +23,22 @@ export default function Nav() {
   return (
     <header className="mb-10 lg:mb-0">
       <nav className="w-[100vw] fixed bg-[#ffffff] lg:p-4  shadow-md lg:flex items-center justify-between text-[#333333] z-30 ">
-           <div className="p-5 lg:p-0 lg:px-5 lg:border-transparent  xl:border px-20">
+        <div className="p-5 lg:p-0 lg:px-5 lg:border-transparent  xl:border px-20">
           <Image className="lg:w-[10vw]" src={logo} alt="logo" />
         </div>
-       <ul className="hidden lg:flex items-center gap-10  p-5 lg:p-0 lg:px-5  px-20 justify-center font-medium">
-          <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-            Home
-          </li>
+        <ul className="hidden lg:flex items-center gap-10  p-5 lg:p-0 lg:px-5  px-20 justify-center font-medium">
+          <Link href={"/pages/Home"}>
+            <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+              Home
+            </li>
+          </Link>
 
-          <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-            About
-          </li>
-          <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-            <span className="flex items-center">
-              <span>Services</span>
-            </span>
-          </li>
+          <Link href={"/pages/About"}>
+            <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+              About
+            </li>
+          </Link>
+
           <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
             <span className="flex items-center">
               <span>Shop</span>
@@ -51,9 +53,12 @@ export default function Nav() {
             </span>
 
             <ul className="opacity-0 absolute shadow-sm group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-              <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                Shop
-              </li>
+              <Link href={"/pages/Shop"}>
+                <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                  Shop
+                </li>
+              </Link>
+
               <li className="block hover:text-[#82b440] transition-all hover:ml-1">
                 Cart
               </li>
@@ -65,15 +70,45 @@ export default function Nav() {
           <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
             Deals
           </li>
-          <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-            Contact
+
+          <Link href={"/pages/Contact"}>
+            <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+              Contact
+            </li>
+          </Link>
+
+          <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+            <span className="flex items-center">
+              <span>Login</span>
+              <svg
+                className="w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+              </svg>
+            </span>
+
+            <ul className="opacity-0 absolute shadow-sm group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
+              <Link href={"/pages/Login"}>
+                <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                  Login
+                </li>
+              </Link>
+              <Link href={"/pages/Signup"}>
+                <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                  SignUp
+                </li>
+              </Link>
+            </ul>
           </li>
         </ul>
 
-     <ul className="flex items-center xl:link1 p-5 lg:p-0 lg:px-5  gap-5 px-20">
+        <ul className="flex items-center xl:link1 p-5 lg:p-0 lg:px-5  gap-5 px-20">
           <li className="relative">
             <svg
-            onClick={searchView}
+              onClick={searchView}
               className="w-9 text-[#b7b7b7] p-2 rounded-[10px] border-1 border-[#b7b7b7] hover:text-white hover:bg-[#82b440] cursor-pointer transition"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -88,24 +123,12 @@ export default function Nav() {
               </div>
             )}
           </li>
-          <li className=" relative text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7] hover:text-white hover:bg-[#82b440] cursor-pointer transition">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-5"
-            >
-              <path d="M4.00436 6.41686L0.761719 3.17422L2.17593 1.76001L5.41857 5.00265H20.6603C21.2126 5.00265 21.6603 5.45037 21.6603 6.00265C21.6603 6.09997 21.6461 6.19678 21.6182 6.29L19.2182 14.29C19.0913 14.713 18.7019 15.0027 18.2603 15.0027H6.00436V17.0027H17.0044V19.0027H5.00436C4.45207 19.0027 4.00436 18.5549 4.00436 18.0027V6.41686ZM5.50436 23.0027C4.67593 23.0027 4.00436 22.3311 4.00436 21.5027C4.00436 20.6742 4.67593 20.0027 5.50436 20.0027C6.33279 20.0027 7.00436 20.6742 7.00436 21.5027C7.00436 22.3311 6.33279 23.0027 5.50436 23.0027ZM17.5044 23.0027C16.6759 23.0027 16.0044 22.3311 16.0044 21.5027C16.0044 20.6742 16.6759 20.0027 17.5044 20.0027C18.3328 20.0027 19.0044 20.6742 19.0044 21.5027C19.0044 22.3311 18.3328 23.0027 17.5044 23.0027Z"></path>
-            </svg>
 
-            <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[#82b440] rounded-full">
-              0
-            </span>
-          </li>
-
+          <Cart/>
+        
           <li>
             <svg
-            onClick={showsideView}
+              onClick={showsideView}
               className="w-9 text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7]  hover:text-white hover:bg-[#82b440] cursor-pointer transition"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

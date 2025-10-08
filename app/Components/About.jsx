@@ -337,7 +337,7 @@ export default function About() {
 
         <div>
           <div className="flex flex-wrap items-center justify-center gap-10">
-            <div className="w-fit group hover:bg-[#071c1f] transition items-center justify-center shadow-lg px-10 py-15 flex flex-col text-center">
+            <div className="w-fit group hover:bg-[#071c1f] transition items-center justify-center md:shadow-lg px-10 py-15 flex flex-col text-center">
               <div className="w-[40vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
                 <Image
                   className="w-full h-full object-cover rounded-full group-hover:scale-110 transition"
@@ -354,7 +354,7 @@ export default function About() {
                 Nwosu C. Emmanuel
               </h4>
             </div>
-            <div className="w-fit group hover:bg-[#071c1f] transition shadow-lg px-10 py-15 flex flex-col text-center  items-center justify-center">
+            <div className="w-fit group hover:bg-[#071c1f] transition md:shadow-lg px-10 py-15 flex flex-col text-center  items-center justify-center">
               <div className="w-[40vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
                 <Image
                   className="w-full h-full object-cover rounded-full group-hover:scale-110 transition"
@@ -371,7 +371,7 @@ export default function About() {
                 Nwosu Chinenyenwa
               </h4>
             </div>
-            <div className="w-fit group hover:bg-[#071c1f] transition shadow-lg px-10 py-15 flex flex-col text-center items-center justify-center">
+            <div className="w-fit group hover:bg-[#071c1f] transition md:shadow-lg px-10 py-15 flex flex-col text-center items-center justify-center">
               <div className="w-[40vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
                 <Image
                   className="w-full h-full object-cover rounded-full group-hover:scale-110 transition"
@@ -404,39 +404,48 @@ export default function About() {
           modules={[Navigation, Autoplay]}
           navigation
           spaceBetween={30}
-          slidesPerView={1}
+          slidesPerView={1} // default for very small screens
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
           }}
           breakpoints={{
-            768: { slidesPerView: 2 },
+            480: { slidesPerView: 1 }, // extra small phones
+            640: { slidesPerView: 1 }, // small phones
+            768: { slidesPerView: 2 }, // tablets
+            1024: { slidesPerView: 3 }, // small laptops
+            1280: { slidesPerView: 3 }, // desktops
+            1536: { slidesPerView: 4 }, // very large screens
           }}
           className="px-5 relative"
         >
           {feedbacks.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="p-1">
-                <div className="max-w-[639px] flex p-[40px] gap-5 shadow-sm mx-auto relative">
+                <div className="max-w-[639px] flex p-[20px] sm:p-[30px] md:p-[40px] gap-5 shadow-sm mx-auto relative">
                   <svg
-                    className="absolute right-0 bottom-0 w-30 text-[#8cb2b23d]"
+                    className="absolute right-0 bottom-0 w-20 sm:w-24 md:w-30 text-[#8cb2b23d]"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
                     <path d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22H2L4.92893 19.0711C3.11929 17.2614 2 14.7614 2 12ZM6.82843 20H12C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 14.1524 4.85124 16.1649 6.34315 17.6569L7.75736 19.0711L6.82843 20ZM8 13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13Z"></path>
                   </svg>
-                  <Image src={item.img} alt={item.name} className="" />
+                  <Image
+                    src={item.img}
+                    alt={item.name}
+                    className="w-12 h-12 sm:w-16 sm:h-16 object-cover"
+                  />
                   <div>
-                    <p className="hyphens-auto mb-[15px]">
+                    <p className="hyphens-auto mb-[15px] text-sm sm:text-base">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua.
                     </p>
-                    <h4 className="text-[#071c1f] group-hover:text-white transition mb-[15px] rajdhani-light leading-1.3 font-[700] text-[20px]">
+                    <h4 className="text-[#071c1f] group-hover:text-white transition mb-[10px] rajdhani-light leading-1.3 font-[700] text-[16px] sm:text-[20px]">
                       Rosalina D. William
                     </h4>
-                    <p className="text-[#7ed957] rajdhani-light font-semibold">
+                    <p className="text-[#7ed957] rajdhani-light font-semibold text-sm sm:text-base">
                       Founder
                     </p>
                   </div>
@@ -456,7 +465,7 @@ export default function About() {
           }
         `}</style>
       </section>
-      <Subcribe/>
+      <Subcribe />
       <Footer />
     </>
   );

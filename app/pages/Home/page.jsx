@@ -159,14 +159,14 @@ export default function page() {
           ""
         )}
         <section className="relative nav-hero ">
-          <div className="bg-[#000000d6]">
+          <div className="bg-[#000000de]">
             <Image
               className="w-20 leave absolute hidden lg:block"
               src={shape2}
               alt="shape2"
             />
             <Image
-              className="w-35 x absolute right-10 lg:top-140 xl:top-150 hidden lg:block"
+              className="w-35 x absolute right-0 top-130 hidden lg:block"
               src={shape1}
               alt="shape1"
             />
@@ -619,7 +619,7 @@ export default function page() {
 
           <div className="flex justify-center items-center">
             <ul className="flex flex-col md:grid md:grid-cols-2 xl:flex lg:flex lg:gap-0 gap-5 lg:flex-row items-center justify-center w-[90vw] lg:w-[85vw] bg-[#ffffff] rounded-[5px] relative top-20 py-10 fun-facts-content-area">
-              <li className="flex  lg:w-[25%] border-dashed lg:border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e]  font-[300] text-[50px]">
+              <li className="flex lg:w-[25%] border-dashed lg:border-r-1 border-[#209e2e] flex-col items-center text-[#209e2e]  font-[300] text-[50px]">
                 <span>120+</span>
                 <p className="text-[16px] font-[400]">Category Vegetable</p>
               </li>
@@ -1802,7 +1802,7 @@ export default function page() {
                 src={more9}
                 alt="morerag2"
               />
-              <div className="w-[80vw] overflow-hidden border-b border-[#209e2e] border-dashed">
+              <div className="w-[80vw] no-scrollbar overflow-x-scroll  border-b border-[#209e2e] border-dashed">
                 <div className="flex  lg:animate-slide-x">
                   <Image
                     className=" px-10 py-5 w-[35vw] border-r-1 border-[#209e2e] border-dashed"
