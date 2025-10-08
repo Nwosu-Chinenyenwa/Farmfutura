@@ -27,13 +27,13 @@ export default function Nav() {
           <Image className="lg:w-[10vw]" src={logo} alt="logo" />
         </div>
         <ul className="hidden lg:flex items-center gap-10  p-5 lg:p-0 lg:px-5  px-20 justify-center font-medium">
-          <Link href={"/pages/Home"}>
+          <Link href={"/Home"}>
             <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
               Home
             </li>
           </Link>
 
-          <Link href={"/pages/About"}>
+          <Link href={"/About"}>
             <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
               About
             </li>
@@ -53,7 +53,7 @@ export default function Nav() {
             </span>
 
             <ul className="opacity-0 absolute shadow-sm group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-              <Link href={"/pages/Shop"}>
+              <Link href={"/Shop"}>
                 <li className="block hover:text-[#82b440] transition-all hover:ml-1">
                   Shop
                 </li>
@@ -71,7 +71,7 @@ export default function Nav() {
             Deals
           </li>
 
-          <Link href={"/pages/Contact"}>
+          <Link href={"/Contact"}>
             <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
               Contact
             </li>
@@ -91,12 +91,12 @@ export default function Nav() {
             </span>
 
             <ul className="opacity-0 absolute shadow-sm group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-              <Link href={"/pages/Login"}>
+              <Link href={"/Login"}>
                 <li className="block hover:text-[#82b440] transition-all hover:ml-1">
                   Login
                 </li>
               </Link>
-              <Link href={"/pages/Signup"}>
+              <Link href={"/Signup"}>
                 <li className="block hover:text-[#82b440] transition-all hover:ml-1">
                   SignUp
                 </li>

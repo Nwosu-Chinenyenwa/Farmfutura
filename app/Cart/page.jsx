@@ -2,13 +2,13 @@
 
 import { useCart } from "../context/CartContext";
 import { useEffect, useState } from "react";
-import AllNav from "./AllNav";
+import AllNav from "../Components/AllNav";
 import Link from "next/link";
 import eggplant from "../../public/img/eggplant.png";
 import pawpaw from "../../public/asset/pawpaw.webp";
 import Image from "next/image";
-import Subcribe from "./Subcribe";
-import Footer from "./Footer";
+import Subcribe from "../Components/Subcribe";
+import Footer from "../Components/Footer";
 
 const cartProduct = [
   {
@@ -31,7 +31,7 @@ const cartProduct = [
   },
 ];
 
-export default function CartPage() {
+export default function page() {
   /*   const { cart, removeFromCart, clearCart, user } = useCart();
   const [total, setTotal] = useState(0);
 
