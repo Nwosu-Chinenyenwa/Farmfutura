@@ -59,17 +59,25 @@ export default function Nav() {
                 </li>
               </Link>
 
-              <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                Cart
-              </li>
-              <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                Checkout
-              </li>
+              <Link href={"/Cart"}>
+                <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                  Cart
+                </li>
+              </Link>
+
+              <Link href={"/Checkout"}>
+                <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                  Checkout
+                </li>
+              </Link>
             </ul>
           </li>
-          <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-            Deals
-          </li>
+
+          <Link href={"/Faq"}>
+            <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+              FAQ
+            </li>
+          </Link>
 
           <Link href={"/Contact"}>
             <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
@@ -124,8 +132,8 @@ export default function Nav() {
             )}
           </li>
 
-          <Cart/>
-        
+          <Cart />
+
           <li>
             <svg
               onClick={showsideView}

@@ -188,9 +188,7 @@ export default function page() {
               </li>
             </div>
 
-            <button className="bg-[#82b440] text-white fixed  right-10 xl:right-5 z-10 cursor-pointer top-70 shake-btn rounded-4xl p-1.5 px-4 font-medium hover:bg-[#15803d] xl:p-2 xl:px-5">
-              Buy Now
-            </button>
+        
             <AllNav />
             <section className="lg:py-30 py-20 md:py-30 px-2 lg:px-0">
               <div className="flex justify-start items-center">

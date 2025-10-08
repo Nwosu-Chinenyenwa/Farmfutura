@@ -3,6 +3,7 @@ import "./globals.css";
 import toast, { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
 import TabTitleWatcher from "./Components/TabTitleWatcher";
+import Link from "next/link";
 
 export const metadata = {
   title: "Farmmerce Agriculture",
@@ -12,13 +13,21 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <meta name="google-site-verification" content="rszEqQis_kfUgJSnfECtDkudVyIW5GdWVkOhAAHmY7o" />
+      <meta
+        name="google-site-verification"
+        content="rszEqQis_kfUgJSnfECtDkudVyIW5GdWVkOhAAHmY7o"
+      />
       <head>
         <title>Farmmerce Agriculture</title>
       </head>
       <body>
         <CartProvider>
           <TabTitleWatcher />
+          <Link href={"/Shop"}>
+          <button className="bg-[#82b440] text-white fixed  right-10 xl:right-5 z-10 cursor-pointer top-70 shake-btn rounded-4xl p-1.5 px-4 font-medium hover:bg-[#15803d] xl:p-2 xl:px-5">
+            Buy Now
+          </button>
+          </Link>
           {children}
         </CartProvider>{" "}
         <Toaster />

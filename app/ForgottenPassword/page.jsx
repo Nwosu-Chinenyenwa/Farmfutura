@@ -1,9 +1,9 @@
 
 "use client";
+export const dynamic = "force-dynamic";
 
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { supabase } from "../backend/lib/superbaseClient";
 import Subcribe from "../Components/Subcribe";
 import Footer from "../Components/Footer";
 import AllNav from "../Components/AllNav";
@@ -19,6 +19,7 @@ export default function page() {
     setLoading(true);
 
     try {
+        const { supabase } = await import("../backend/lib/superbaseClient");
       const redirectTo = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/reset-password`;
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo,

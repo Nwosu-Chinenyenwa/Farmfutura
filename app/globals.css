@@ -16,6 +16,9 @@ body {
     border-top: 1px solid rgba(0, 0, 0, 0.067);
   }
   
+  .order{
+        box-shadow: 0px 5px 28.5px 1.5px rgba(149, 152, 200, 0.2);
+  }
 
 /* loader */
 /* From Uiverse.io by NlghtM4re */ 

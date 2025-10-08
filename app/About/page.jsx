@@ -84,8 +84,9 @@ export default function page() {
           <h1 className="text-[30px] font-extrabold">About us</h1>
           <div>
             <div className="flex items-center justify-center gap-2">
-              <Link href={"/pages/Home"}></Link>
-              <p className="cursor-pointer">Home</p>
+              <Link href={"/Home"}>
+                <p className="cursor-pointer">Home</p>
+              </Link>
               <span className="w-[5px] h-[5px] rounded-full bg-[#209e2e] block"></span>
               <p className="cursor-pointer">About</p>
             </div>
