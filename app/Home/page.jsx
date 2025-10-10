@@ -159,7 +159,7 @@ export default function page() {
           ""
         )}
         <section className="relative nav-hero ">
-          <div className="bg-[#000000de]">
+          <div className="bg-[#000000d6]">
             <Image
               className="w-20 leave absolute hidden lg:block"
               src={shape2}

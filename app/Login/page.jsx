@@ -7,7 +7,6 @@ import Footer from "../Components/Footer";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { supabase } from "../backend/lib/superbaseClient";
 
 export default function page() {
   const [load, setLoad] = useState(false);
@@ -16,115 +15,7 @@ export default function page() {
   const [password, setpassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = async (e) => {
-  e.preventDefault();
-  setLoad(true);
 
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      // Friendly message for common "confirm email" errors
-      const msg = (error.message || "").toLowerCase();
-      if (msg.includes("confirm") || msg.includes("email")) {
-        toast.error("Please confirm your email first. Check your inbox (and spam).");
-      } else {
-        toast.error(error.message);
-      }
-      setLoad(false);
-      return;
-    }
-
-    const user = data?.user ?? data;
-
-    if (!user?.id) {
-      toast.error("Login did not return a user. Check your Supabase settings.");
-      setLoad(false);
-      return;
-    }
-
-    // --- EMAIL CONFIRMATION CHECK ---
-    // Some Supabase setups return `email_confirmed_at`, others `confirmed_at`.
-    // If either field exists and is falsy, we block login and ask the user to confirm.
-    const hasEmailConfirmedField =
-      user.email_confirmed_at !== undefined || user.confirmed_at !== undefined;
-
-    const isConfirmed =
-      (user.email_confirmed_at !== undefined && Boolean(user.email_confirmed_at)) ||
-      (user.confirmed_at !== undefined && Boolean(user.confirmed_at));
-
-    if (hasEmailConfirmedField && !isConfirmed) {
-      toast.error("Please verify your email before logging in. Check your inbox.");
-      // sign out any partial session for safety
-      await supabase.auth.signOut();
-      setLoad(false);
-      return;
-    }
-
-    // --- FETCH PROFILE & APP DATA ---
-    const { data: profile, error: profileErr } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .single();
-
-    if (profileErr) {
-      toast.error("Account not found in the app database. Please sign up first.");
-      await supabase.auth.signOut();
-      setLoad(false);
-      return;
-    }
-
-    const [{ data: cart }, { data: projects }] = await Promise.all([
-      supabase
-        .from("carts")
-        .select("*")
-        .eq("user_id", user.id)
-        .single()
-        .catch(() => ({ data: null })),
-      supabase
-        .from("projects")
-        .select("*")
-        .eq("owner_id", user.id)
-        .catch(() => ({ data: [] })),
-    ]);
-
-    localStorage.setItem("profile", JSON.stringify(profile));
-    localStorage.setItem("cart", JSON.stringify(cart ?? { items: [] }));
-    localStorage.setItem("projects", JSON.stringify(projects ?? []));
-
-    toast.success("Login successful — redirecting to dashboard...");
-    router.push("/pages/Home");
-  } catch (err) {
-    console.error(err);
-    toast.error(err?.message || "Login failed");
-  } finally {
-    setLoad(false);
-  }
-};
-
-
-  const handleGoogleLogin = async (e) => {
-    e.preventDefault();
-
-    setload(true);
-    try {
-      const { user } = await loginWithGoogle();
-      toast.success("Welcome back 👋");
-      console.log(user);
-    } catch (error) {
-      if (error.code === "auth/user-not-found") {
-        toast.error("No account found. Please signup first.");
-      } else {
-        toast.error(error.message || "Login failed.");
-      }
-    } finally {
-      setload(false);
-    }
-  };
 
   return (
     <>
@@ -146,7 +37,6 @@ export default function page() {
       <section>
         <div className="py-10 px-2 mt-10 md:flex md:items-center md:justify-center ">
           <form
-            onSubmit={handleLogin}
             className="md:shadow-sm  md:px-8 py-8 px-2 md:w-[60vw] xl:w-[40vw]"
           >
             <div className="mb-[30px]">

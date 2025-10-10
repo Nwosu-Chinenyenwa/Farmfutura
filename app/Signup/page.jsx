@@ -7,7 +7,7 @@ import Footer from "../Components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import { supabase } from "../backend/lib/superbaseClient.js";
+import * as z from "zod";
 
 export default function page() {
   const [email, setEmail] = useState("");
@@ -16,51 +16,17 @@ export default function page() {
   const [load, setLoad] = useState(false);
   const router = useRouter();
 
-  // --- Email & Password Signup ---
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    setLoad(true);
+  const signupSchema = z.object({
+    email: z.string().email({ message: "Please enter a valid email address" }),
+    password: z
+      .string()
+      .min(8, { message: "Password must be at least 8 characters" })
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, {
+        message:
+          "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+      }),
+  });
 
-    try {
-      const redirectTo = `${
-        process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-      }/confirm`;
-
-      const { data, error } = await supabase.auth.signUp(
-        { email, password },
-        { emailRedirectTo: redirectTo } 
-      );
-
-      if (error) {
-        toast.error(error.message);
-        setLoad(false);
-        return;
-      }
-
-      const user = data?.user ?? data;
-      if (user?.id) {
-        await fetch("/api/create-profile", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: user.id, email }),
-        }).catch((err) =>
-          console.warn("create-profile failed (non-blocking):", err)
-        );
-      }
-
-      toast.success(
-        "Signup successful — check your email for the confirmation link."
-      );
-      router.push("/check-your-email");
-    } catch (err) {
-      console.error(err);
-      toast.error(err?.message || "Signup failed");
-    } finally {
-      setLoad(false);
-    }
-  };
-
-  // --- Google Signup ---
   const handleGoogleSignup = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
@@ -74,7 +40,6 @@ export default function page() {
     }
   };
 
-  // --- Facebook Signup ---
   const handleFacebookSignup = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
@@ -85,6 +50,63 @@ export default function page() {
     } catch (error) {
       toast.error("Error with Facebook Signup");
       console.error(error);
+    }
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setMessage("");
+    setLoad(true);
+
+    const result = signupSchema.safeParse({ email, password });
+    if (!result.success) {
+      // Zod errors live under `error.issues`
+      const first = result.error?.issues?.[0];
+      const msg = first?.message || "Validation failed";
+      setMessage(msg);
+      toast.error(msg);
+      setLoad(false);
+      return;
+    }
+
+    try {
+      sessionStorage.setItem("verificationEmail", email);
+
+      const resp = await fetch("/api/resend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "verification",
+          email,
+          password,
+          isPasswordReset: false,
+          origin:
+            typeof window !== "undefined" ? window.location.origin : undefined,
+        }),
+      });
+
+      const json = await resp.json();
+
+      if (!resp.ok) {
+        const errMsg = json?.error || "Failed to send verification email";
+        toast.error(errMsg);
+        setMessage(errMsg);
+        setLoad(false);
+        return;
+      }
+
+      toast.success("Verification email sent. Check your inbox.");
+      router.push("/Verify");
+    } catch (err) {
+      console.error(err);
+      const msg =
+        err && err.message ? err.message : "An error occurred during signup";
+      toast.error(msg);
+      setMessage(msg);
+    } finally {
+      setLoad(false);
     }
   };
 

@@ -7,7 +7,7 @@ import Footer from "../Components/Footer";
 import Link from "next/link";
 
 export default function Page() {
-  const [activeIndex, setActiveIndex] = useState(null); // ✅ Track which one is open
+  const [activeIndex, setActiveIndex] = useState(null); 
 
   const faq = [
     {
