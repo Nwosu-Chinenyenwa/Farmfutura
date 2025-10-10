@@ -13,7 +13,6 @@ import Footer from "../Components/Footer";
 import eggplant from "../../public/img/eggplant.png";
 import pawpaw from "../../public/asset/pawpaw.webp";
 import Spline from "@splinetool/react-spline";
-import { useCart } from "../context/CartContext";
 
 export default function page() {
   const [selectedProduct, setSelectedProduct] = useState(false);
@@ -238,7 +237,6 @@ export default function page() {
   };
 
   const activeProduct = getActiveProduct();
-  const {addToCart} = useCart();
   return (
     <>
       <section className="pagetitle">
