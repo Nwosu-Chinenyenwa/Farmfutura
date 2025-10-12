@@ -28,7 +28,7 @@ export async function POST(request) {
 
         if (res.data?.properties?.email_otp) {
           data = await resend.emails.send({
-            from: "auth@farmforte",
+            from: "onboarding@resend.dev",
             to: email,
             subject: isPasswordReset ? "Reset your password" : "Verify your email",
             react: VerificationEmail({
@@ -47,7 +47,7 @@ export async function POST(request) {
           origin || new URL(request.url).origin + "/Home";
 
         data = await resend.emails.send({
-          from: "welcome@farmforte",
+          from: "onboarding@resend.dev",
           to: email,
           subject: "Welcome to our platform!",
           react: WelcomeEmail({
@@ -63,7 +63,7 @@ export async function POST(request) {
           origin || new URL(request.url).origin + "/Login";
 
         data = await resend.emails.send({
-          from: "auth@farmforte",
+          from: "onboarding@resend.dev",
           to: email,
           subject: "Your password has been reset",
           react: PasswordResetConfirmationEmail({

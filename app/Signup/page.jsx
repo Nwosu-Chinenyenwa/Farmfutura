@@ -13,6 +13,7 @@ export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [comfirm, setComfirm] = useState("")
   const [load, setLoad] = useState(false);
   const router = useRouter();
 
@@ -57,6 +58,11 @@ export default function page() {
     e.preventDefault();
     setMessage("");
     setLoad(true);
+
+    if(comfirm !== password){
+      setLoad(false)
+      return;
+    }
 
     const result = signupSchema.safeParse({ email, password });
     if (!result.success) {
@@ -204,6 +210,13 @@ export default function page() {
                 type="password"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <input
+                className="border-1 border-[#8080802a] focus:border-[#209e2e] outline-none w-full p-4 rounded-[5px]"
+                type="password"
+                placeholder="Comfirm Password"
+                onChange={(e) => setComfirm(e.target.value)}
                 required
               />
 

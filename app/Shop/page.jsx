@@ -180,8 +180,8 @@ export default function page() {
       <div className="fixed inset-0 bg-[#000000a8] flex justify-center items-center z-50">
         <div className="flex relative py-8 items-center gap-10 bg-white px-10">
           <svg
-          onClick={onClose}
-          className="absolute w-7 cursor-pointer rounded-4xl bg-[#209e2e] top-[-30px] right-[-20px] text-white"
+            onClick={onClose}
+            className="absolute w-7 cursor-pointer rounded-4xl bg-[#209e2e] top-[-30px] right-[-20px] text-white"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -215,13 +215,16 @@ export default function page() {
             </span>
 
             <span className="flex rajdhani-light gap-5">
-              <button onClick={() => addToCart(product)} className="bg-[#209e2e] text-[18px] py-1 px-5 cursor-pointer font-[700] text-white hover:bg-transparent hover:border-1 hover:border-[#071c1f] hover:text-[#071c1f] transition">
-                Add to cart
-              </button>
-              <button className="bg-[#071c1f] text-[18px] py-1 px-5 cursor-pointer font-[700] text-white hover:bg-transparent hover:border-1 hover:border-[#071c1f] hover:text-[#071c1f] transition">
-                              View cart
-
-              </button>
+              <Link href={"/Checkout"}>
+                <button className="bg-[#209e2e] text-[18px] py-1 px-5 cursor-pointer font-[700] text-white hover:bg-transparent hover:border-1 hover:border-[#071c1f] hover:text-[#071c1f] transition">
+                  Checkout
+                </button>
+              </Link>
+              <Link href={"/Cart"}>
+                <button className="bg-[#071c1f] text-[18px] py-1 px-5 cursor-pointer font-[700] text-white hover:bg-transparent hover:border-1 hover:border-[#071c1f] hover:text-[#071c1f] transition">
+                  View cart
+                </button>
+              </Link>
             </span>
           </div>
         </div>

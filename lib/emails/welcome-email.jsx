@@ -13,7 +13,7 @@ import * as React from "react";
 
 export const WelcomeEmail = ({
   userEmail,
-  dashboardUrl = "http://localhost:3000/Home",
+  dashboardUrl = "http://localhost:3000/Shop",
 }) => {
   return (
     <Html>
@@ -33,7 +33,7 @@ export const WelcomeEmail = ({
           </Text>
           <Section style={buttonContainer}>
             <Link style={button} href={dashboardUrl}>
-              Go to Dashboard
+              Go to Shop
             </Link>
           </Section>
         </Container>

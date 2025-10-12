@@ -36,9 +36,6 @@ export const PasswordResetConfirmationEmail = ({
             If you did not reset your password, please contact us immediately as
             your account may have been compromised.
           </Text>
-          <Text style={footer}>
-            This is an automated message, please do not reply to this email.
-          </Text>
         </Container>
       </Body>
     </Html>

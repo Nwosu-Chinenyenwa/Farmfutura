@@ -7,6 +7,7 @@ import Footer from "../Components/Footer";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { login } from "@/lib/utils/auth-helpers"; 
 
 export default function page() {
   const [load, setLoad] = useState(false);
@@ -15,7 +16,23 @@ export default function page() {
   const [password, setpassword] = useState("");
   const router = useRouter();
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoad(true);
+    setmessage("");
 
+    try {
+      await login(email, password); 
+      toast.success("Logged in successfully");
+      router.push("/Home");
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : "Invalid email or password";
+      setmessage(errMsg);
+      toast.error(errMsg);
+    } finally {
+      setLoad(false);
+    }
+  }
 
   return (
     <>
@@ -37,6 +54,7 @@ export default function page() {
       <section>
         <div className="py-10 px-2 mt-10 md:flex md:items-center md:justify-center ">
           <form
+            onSubmit={handleSubmit} // <- attached handler here
             className="md:shadow-sm  md:px-8 py-8 px-2 md:w-[60vw] xl:w-[40vw]"
           >
             <div className="mb-[30px]">
@@ -103,7 +121,7 @@ export default function page() {
               />
               <input
                 className="border-1 border-[#8080802a] focus:border-1 focus:border-[#209e2e] outline-none w-full p-4 rounded-[5px]"
-                type="text"
+                type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
@@ -119,6 +137,8 @@ export default function page() {
                   </p>
                 </Link>
               </span>
+
+              {/* show loading animation or submit button (unchanged UI) */}
               {load ? (
                 <div className="newtons-cradle">
                   <div className="newtons-cradle__dot"></div>
@@ -145,7 +165,7 @@ export default function page() {
           </form>
         </div>
       </section>
-      <Toaster/>
+      <Toaster />
       <Subcribe />
       <Footer />
     </>

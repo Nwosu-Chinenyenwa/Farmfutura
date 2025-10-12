@@ -151,6 +151,11 @@ export default function AllNav() {
                       SignUp
                     </li>
                   </Link>
+                  <Link href={"/Profile"}>
+                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                      Profile
+                    </li>
+                  </Link>
                 </ul>
               </li>
             </ul>
@@ -250,7 +255,7 @@ export default function AllNav() {
               <section className="  justify-center relative flex items-center ">
                 <div className="justify-center fixed  w-[100vw] bg-[#00000087] h-[200vh]  flex items-center shadow-sm">
                   <ul className=" w-[90vw] bg-white slideMenu h-fit relative top-70 overflow-y-scroll  bottom-3">
-                    <Link href={"/pages/Home"}>
+                    <Link href={"/Home"}>
                       <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                         <p className="text-[#82b440]">Home</p>
                         <svg
@@ -276,7 +281,7 @@ export default function AllNav() {
                         </svg>
                       </li>
                     </Link>
-                    <Link href={"/pages/Shop"}>
+                    <Link href={"/Shop"}>
                       <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                         <p className="text-[#82b440]">Shop</p>
                         <svg
@@ -289,7 +294,7 @@ export default function AllNav() {
                         </svg>
                       </li>
                     </Link>
-                    <Link href={"/pages/ViewCart"}>
+                    <Link href={"/Cart"}>
                       <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                         <p className="text-[#82b440]">Cart</p>
                         <svg
@@ -302,6 +307,7 @@ export default function AllNav() {
                         </svg>
                       </li>
                     </Link>
+                    <Link href={"/Checkout"}>
                     <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                       <p className="text-[#82b440]">Checkout</p>
                       <svg
@@ -313,8 +319,10 @@ export default function AllNav() {
                         <path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z"></path>
                       </svg>
                     </li>
+                    </Link>
+                    <Link href={"/Faq"}>
                     <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">Deals</p>
+                      <p className="text-[#82b440]">FAQ</p>
                       <svg
                         className="w-6 text-[gray]"
                         xmlns="http://www.w3.org/2000/svg"
@@ -324,7 +332,8 @@ export default function AllNav() {
                         <path d="M3 3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H3ZM6 7H12V13H6V7ZM8 9V11H10V9H8ZM18 9H14V7H18V9ZM14 13V11H18V13H14ZM6 17V15L18 15V17L6 17Z"></path>
                       </svg>
                     </li>
-                    <Link href={"/pages/Contact"}>
+                    </Link>
+                    <Link href={"/Contact"}>
                       <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                         <p className="text-[#82b440]">Contact</p>
                         <svg
@@ -337,9 +346,9 @@ export default function AllNav() {
                         </svg>
                       </li>
                     </Link>
-                    <Link href={"/pages/Signup"}>
+                    <Link href={"/Login"}>
                       <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                        <p className="text-[#82b440]">SignUp</p>
+                        <p className="text-[#82b440]">Login now!</p>
 
                         <svg
                           className="w-6 text-[gray]"
