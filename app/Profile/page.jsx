@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
+import AvatarNav from '../Components/AvaterNav';
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -100,7 +101,6 @@ export default function ProfilePage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Profile Information */}
         <div className="bg-white border rounded-lg shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b">
             <h3 className="text-lg font-semibold">Personal Information</h3>
@@ -127,6 +127,8 @@ export default function ProfilePage() {
                   className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-200"
                 />
               </div>
+
+              <AvatarNav/>
 
               <button
                 type="submit"
