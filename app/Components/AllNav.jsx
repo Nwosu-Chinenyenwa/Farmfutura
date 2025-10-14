@@ -17,12 +17,14 @@ import sub8 from "../../public/img/8.jpg";
 import { usePathname } from "next/navigation";
 import Nav from "./Nav";
 import Cart from "./Cart";
+import AvatarNav from "./AvaterNav";
 
 export default function AllNav() {
   const [view, setview] = useState(false);
   const [showside, setshowside] = useState(false);
   const [hamburga, sethamburga] = useState(false);
   const [displayNav, setdisplayNav] = useState(false);
+  const [main, setmain] = useState(true);
 
   const search = () => setview(!view);
   let hamtoggle = useCallback(() => {
@@ -44,10 +46,26 @@ export default function AllNav() {
 
   useEffect(() => {
     const Scroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 150) {
         setdisplayNav(true);
+        setmain(false);
       } else {
         setdisplayNav(false);
+        setmain(true);
+      }
+    };
+
+    window.addEventListener("scroll", Scroll);
+
+    return () => window.removeEventListener("scroll", Scroll);
+  }, []);
+
+  useEffect(() => {
+    const Scroll = () => {
+      if (window.scrollY > 100) {
+        setmain(false);
+      } else {
+        setmain(true);
       }
     };
 
@@ -68,129 +86,128 @@ export default function AllNav() {
 
       <section>
         <header className="mb-10 xl:mb-0">
-          <nav className=" hidden lg:flex items-center lg:p-4  xl:p-0 justify-between bg-[#00000093] text-white nav-border">
-            <div className="p-5 lg:p-0 lg:px-5 xl:py-4 xl:border-r xl:border-[#8b770577] lg:border-transparent  px-20">
-              <Image className="lg:w-[10vw]" src={logo} alt="logo" />
-            </div>
-            <ul className="hidden lg:flex items-center gap-10  p-5 lg:p-0 lg:px-5  px-20 justify-center font-medium">
-              <Link href={"/Home"}>
-                <li className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100">
-                  Home
-                </li>
-              </Link>
+          {main && (
+            <nav className=" hidden lg:flex items-center lg:p-4  xl:p-0 justify-between bg-[#00000093] text-white nav-border">
+              <div className="p-5 lg:p-0 lg:px-5 xl:py-4 xl:border-r xl:border-[#8b770577] lg:border-transparent  px-20">
+                <Image className="lg:w-[10vw]" src={logo} alt="logo" />
+              </div>
+              <ul className="hidden lg:flex items-center gap-10  p-5 lg:p-0 lg:px-5  px-20 justify-center font-medium">
+                <Link href={"/Home"}>
+                  <li className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100">
+                    Home
+                  </li>
+                </Link>
 
-              <Link href={"/About"}>
-                <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-                  About
+                <Link href={"/About"}>
+                  <li className="relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                    About
+                  </li>
+                </Link>
+                <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                  <span className="flex items-center">
+                    <span>Shop</span>
+                    <svg
+                      className="w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                    </svg>
+                  </span>
+
+                  <ul className="opacity-0 absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
+                    <Link href={"/Shop"}>
+                      <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                        Shop
+                      </li>
+                    </Link>
+                    <Link href={"/Cart"}>
+                      <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                        Cart
+                      </li>
+                    </Link>
+
+                    <Link href={"/Checkout"}>
+                      <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                        Checkout
+                      </li>
+                    </Link>
+                  </ul>
                 </li>
-              </Link>
-              <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-                <span className="flex items-center">
-                  <span>Shop</span>
+                <Link href={"/Faq"}>
+                  <li className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100">
+                    FAQ
+                  </li>
+                </Link>
+                <Link href={"/Contact"}>
+                  <li className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100">
+                    Contact
+                  </li>
+                </Link>
+
+                <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
+                  <span className="flex items-center">
+                    <span>Login</span>
+                    <svg
+                      className="w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                    </svg>
+                  </span>
+
+                  <ul className="opacity-0 absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
+                    <Link href={"/Login"}>
+                      <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                        Login
+                      </li>
+                    </Link>
+                    <Link href={"/Signup"}>
+                      <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                        SignUp
+                      </li>
+                    </Link>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul className="flex items-center xl:link1 xl:border-l xl:py-4 xl:border-[#8b770577] p-5 lg:p-0 lg:px-5  gap-5 px-20">
+                <li className=" relative">
                   <svg
-                    className="w-5"
+                    onClick={search}
+                    className="w-9 text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7] hover:text-white hover:bg-[#82b440] cursor-pointer transition"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
-                    <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                    <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
                   </svg>
-                </span>
 
-                <ul className="opacity-0 absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-                  <Link href={"/Shop"}>
-                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                      Shop
-                    </li>
-                  </Link>
-                  <Link href={"/Cart"}>
-                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                      Cart
-                    </li>
-                  </Link>
-
-                  <Link href={"/Checkout"}>
-                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                      Checkout
-                    </li>
-                  </Link>
-                </ul>
-              </li>
-              <Link href={"/Faq"}>
-                <li className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100">
-                  FAQ
+                  {view && (
+                    <div className="absolute right-0.5 top-15 bg-white w-[23vw] h-[80px] flex items-center justify-center">
+                      <Search />
+                    </div>
+                  )}
                 </li>
-              </Link>
-              <Link href={"/Contact"}>
-                <li className="relative cursor-pointer transition hover:text-[#209e2e] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100">
-                  Contact
-                </li>
-              </Link>
-
-              <li className="group relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:top-8 after:w-3 after:h-3 after:rounded-full after:bg-[#209e2e] after:transition after:opacity-0 hover:after:opacity-100 transition hover:text-[#209e2e]">
-                <span className="flex items-center">
-                  <span>Login</span>
+                <Cart />
+                <li onClick={() => setshowside(true)}>
                   <svg
-                    className="w-5"
+                    className="w-9 text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7]  hover:text-white hover:bg-[#82b440] cursor-pointer transition"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
-                    <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                    <path d="M3 4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V10C11 10.5523 10.5523 11 10 11H4C3.44772 11 3 10.5523 3 10V4ZM3 14C3 13.4477 3.44772 13 4 13H10C10.5523 13 11 13.4477 11 14V20C11 20.5523 10.5523 21 10 21H4C3.44772 21 3 20.5523 3 20V14ZM13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V10C21 10.5523 20.5523 11 20 11H14C13.4477 11 13 10.5523 13 10V4ZM13 14C13 13.4477 13.4477 13 14 13H20C20.5523 13 21 13.4477 21 14V20C21 20.5523 20.5523 21 20 21H14C13.4477 21 13 20.5523 13 20V14ZM15 5V9H19V5H15ZM15 15V19H19V15H15ZM5 5V9H9V5H5ZM5 15V19H9V15H5Z"></path>
                   </svg>
-                </span>
+                </li>
 
-                <ul className="opacity-0 absolute group-hover:opacity-100 mt-10 bg-white text-black flex flex-col gap-2 w-50 p-5">
-                  <Link href={"/Login"}>
-                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                      Login
-                    </li>
-                  </Link>
-                  <Link href={"/Signup"}>
-                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                      SignUp
-                    </li>
-                  </Link>
-                  <Link href={"/Profile"}>
-                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                      Profile
-                    </li>
-                  </Link>
-                </ul>
-              </li>
-            </ul>
-
-            <ul className="flex items-center xl:link1 xl:border-l xl:py-4 xl:border-[#8b770577] p-5 lg:p-0 lg:px-5  gap-5 px-20">
-              <li className=" relative">
-                <svg
-                  onClick={search}
-                  className="w-9 text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7] hover:text-white hover:bg-[#82b440] cursor-pointer transition"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
-                </svg>
-
-                {view && (
-                  <div className="absolute right-0.5 top-15 bg-white w-[23vw] h-[80px] flex items-center justify-center">
-                    <Search />
-                  </div>
-                )}
-              </li>
-              <Cart />
-              <li onClick={() => setshowside(true)}>
-                <svg
-                  className="w-9 text-[#b7b7b7] p-2 border-1 rounded-[10px] border-[#b7b7b7]  hover:text-white hover:bg-[#82b440] cursor-pointer transition"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M3 4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V10C11 10.5523 10.5523 11 10 11H4C3.44772 11 3 10.5523 3 10V4ZM3 14C3 13.4477 3.44772 13 4 13H10C10.5523 13 11 13.4477 11 14V20C11 20.5523 10.5523 21 10 21H4C3.44772 21 3 20.5523 3 20V14ZM13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V10C21 10.5523 20.5523 11 20 11H14C13.4477 11 13 10.5523 13 10V4ZM13 14C13 13.4477 13.4477 13 14 13H20C20.5523 13 21 13.4477 21 14V20C21 20.5523 20.5523 21 20 21H14C13.4477 21 13 20.5523 13 20V14ZM15 5V9H19V5H15ZM15 15V19H19V15H15ZM5 5V9H9V5H5ZM5 15V19H9V15H5Z"></path>
-                </svg>
-              </li>
-            </ul>
-          </nav>
+                <AvatarNav title="View profile" />
+              </ul>
+            </nav>
+          )}
 
           <section className="flex z-10 lg:hidden flex-col relative">
             <nav className="flex z-10 fixed px-5 w-[100vw] bg-white justify-between items-center p-3">
@@ -308,30 +325,30 @@ export default function AllNav() {
                       </li>
                     </Link>
                     <Link href={"/Checkout"}>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">Checkout</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z"></path>
-                      </svg>
-                    </li>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">Checkout</p>
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z"></path>
+                        </svg>
+                      </li>
                     </Link>
                     <Link href={"/Faq"}>
-                    <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-                      <p className="text-[#82b440]">FAQ</p>
-                      <svg
-                        className="w-6 text-[gray]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M3 3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H3ZM6 7H12V13H6V7ZM8 9V11H10V9H8ZM18 9H14V7H18V9ZM14 13V11H18V13H14ZM6 17V15L18 15V17L6 17Z"></path>
-                      </svg>
-                    </li>
+                      <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
+                        <p className="text-[#82b440]">FAQ</p>
+                        <svg
+                          className="w-6 text-[gray]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M3 3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H3ZM6 7H12V13H6V7ZM8 9V11H10V9H8ZM18 9H14V7H18V9ZM14 13V11H18V13H14ZM6 17V15L18 15V17L6 17Z"></path>
+                        </svg>
+                      </li>
                     </Link>
                     <Link href={"/Contact"}>
                       <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">

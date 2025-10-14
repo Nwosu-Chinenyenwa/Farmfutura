@@ -1,17 +1,23 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { createClient } from '@/utils/supabase/client';
-import AvatarNav from '../Components/AvaterNav';
+import { useState, useEffect } from "react";
+import { createClient } from "@/utils/supabase/client";
+import AvatarNav from "../Components/AvaterNav";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // profile fields
-  const [fullName, setFullName] = useState('');
+  const [fullName, setFullName] = useState("");
   const [saving, setSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(null); // null | true | false
+  const [saveSuccess, setSaveSuccess] = useState(null);
+
+  const [deleting, setDeleting] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false); // ✅ added for popup cart/modal
+
+  const router = useRouter();
 
   useEffect(() => {
     async function getUserAndProfile() {
@@ -29,20 +35,17 @@ export default function ProfilePage() {
 
         setUser(session.user);
 
-        // fetch profile row for this user (profiles table)
         const { data: profile, error: profileError } = await supabase
-          .from('profiles')
-          .select('full_name')
-          .eq('id', session.user.id)
+          .from("profiles")
+          .select("full_name")
+          .eq("id", session.user.id)
           .single();
 
         if (!profileError && profile) {
-          setFullName(profile.full_name || '');
-        } else {
-          // no profile row found (trigger might not have run) — leave fullName empty
+          setFullName(profile.full_name || "");
         }
       } catch (err) {
-        console.error('Failed to load user/profile', err);
+        console.error("Failed to load user/profile", err);
       } finally {
         setIsLoading(false);
       }
@@ -51,9 +54,7 @@ export default function ProfilePage() {
     getUserAndProfile();
   }, []);
 
-  if (isLoading) {
-    return null; // keep same behavior
-  }
+  if (isLoading) return null;
 
   async function handleSave(e) {
     e.preventDefault();
@@ -64,43 +65,80 @@ export default function ProfilePage() {
 
     try {
       const supabase = createClient();
-
-      // Upsert profile row (will insert if missing, update if exists)
       const { data, error } = await supabase
-        .from('profiles')
+        .from("profiles")
         .upsert(
-          {
-            id: user.id,
-            email: user.email,
-            full_name: fullName,
-          },
-          { returning: 'representation' } // get back the row
+          { id: user.id, email: user.email, full_name: fullName },
+          { returning: "representation" }
         )
         .select()
         .single();
 
       if (error) throw error;
-
       setSaveSuccess(true);
-      // optional: reflect returned row (data) if you want
     } catch (err) {
-      console.error('Save profile error', err);
+      console.error("Save profile error", err);
       setSaveSuccess(false);
     } finally {
       setSaving(false);
-      // auto-clear success/failure after a short time
       setTimeout(() => setSaveSuccess(null), 3000);
     }
   }
 
+  async function handleSignOut() {
+    try {
+      setSigningOut(true);
+      const supabase = createClient();
+      const { error } = await supabase.auth.signOut();
+      if (error) console.error("Sign out error:", error);
+      router.push("/Home");
+    } catch (err) {
+      console.error("Sign out failed", err);
+    } finally {
+      setSigningOut(false);
+    }
+  }
+
+  // ✅ actual delete logic
+  async function handleDeleteAccountConfirmed() {
+    if (!user) return;
+
+    setDeleting(true);
+    try {
+      const res = await fetch("/api/account/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        console.error("Account delete failed:", json);
+        setDeleting(false);
+        return;
+      }
+
+      const supabase = createClient();
+      await supabase.auth.signOut();
+      router.push("/Home");
+    } catch (err) {
+      console.error("Delete account error:", err);
+    } finally {
+      setDeleting(false);
+      setShowConfirmModal(false);
+    }
+  }
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       <div>
         <h2 className="text-2xl font-bold tracking-tight">Profile</h2>
         <p className="text-gray-500">Manage your account settings and preferences.</p>
       </div>
 
+      {/* rest of your profile UI unchanged */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* personal info */}
         <div className="bg-white border rounded-lg shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b">
             <h3 className="text-lg font-semibold">Personal Information</h3>
@@ -108,19 +146,17 @@ export default function ProfilePage() {
           <form onSubmit={handleSave}>
             <div className="p-6 space-y-4">
               <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+                <label className="block text-sm font-medium mb-1">Email</label>
                 <input
-                  id="email"
-                  value={user?.email || ''}
+                  value={user?.email || ""}
                   disabled
                   className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-200"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="name" className="block text-sm font-medium mb-1">Full Name</label>
+                <label className="block text-sm font-medium mb-1">Full Name</label>
                 <input
-                  id="name"
                   placeholder="Enter your full name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
@@ -128,14 +164,14 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <AvatarNav/>
+              <AvatarNav />
 
               <button
                 type="submit"
                 className="w-full px-4 py-2 rounded-md inline-flex items-center justify-center bg-green-600 text-white"
                 disabled={saving}
               >
-                {saving ? 'Saving...' : 'Save Changes'}
+                {saving ? "Saving..." : "Save Changes"}
               </button>
 
               {saveSuccess === true && (
@@ -148,58 +184,7 @@ export default function ProfilePage() {
           </form>
         </div>
 
-        {/* Security Settings (unchanged skeleton) */}
-        <div className="bg-white border rounded-lg shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b">
-            <h3 className="text-lg font-semibold">Security</h3>
-          </div>
-          <div className="p-6 space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="current-password" className="block text-sm font-medium mb-1">Current Password</label>
-              <input
-                id="current-password"
-                type="password"
-                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-200"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="new-password" className="block text-sm font-medium mb-1">New Password</label>
-              <input
-                id="new-password"
-                type="password"
-                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-200"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="confirm-password" className="block text-sm font-medium mb-1">Confirm New Password</label>
-              <input
-                id="confirm-password"
-                type="password"
-                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-200"
-              />
-            </div>
-
-            <button className="w-full px-4 py-2 rounded-md inline-flex items-center justify-center bg-green-600 text-white">
-              Update Password
-            </button>
-          </div>
-        </div>
-
-        {/* Activity Chart (placeholder) */}
-        <div className="md:col-span-2 bg-white border rounded-lg shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b">
-            <h3 className="text-lg font-semibold">Login Activity</h3>
-          </div>
-          <div className="p-6">
-            <p className="text-sm text-gray-500 mt-4">
-              This chart shows your login activity over the past 30 days.
-            </p>
-          </div>
-        </div>
-
-        {/* Account Settings (skeleton) */}
+        {/* account settings */}
         <div className="md:col-span-2 bg-white border rounded-lg shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b">
             <h3 className="text-lg font-semibold">Account Settings</h3>
@@ -208,35 +193,58 @@ export default function ProfilePage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">Two-Factor Authentication</p>
-                  <p className="text-sm text-gray-500">Add an extra layer of security to your account</p>
-                </div>
-                <button className="px-4 py-2 rounded-md inline-flex items-center justify-center border">Enable</button>
-              </div>
-
-              <div className="my-4 border-t" />
-
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Email Notifications</p>
-                  <p className="text-sm text-gray-500">Receive email notifications about account activity</p>
-                </div>
-                <button className="px-4 py-2 rounded-md inline-flex items-center justify-center border">Configure</button>
-              </div>
-
-              <div className="my-4 border-t" />
-
-              <div className="flex items-center justify-between">
-                <div>
                   <p className="font-medium text-red-600">Delete Account</p>
-                  <p className="text-sm text-gray-500">Permanently delete your account and all data</p>
+                  <p className="text-sm text-gray-500">
+                    Permanently delete your account and all data
+                  </p>
                 </div>
-                <button className="px-4 py-2 rounded-md inline-flex items-center justify-center bg-red-600 text-white">Delete Account</button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowConfirmModal(true)} // ✅ open popup cart
+                    className="px-4 py-2 rounded-md inline-flex items-center justify-center bg-red-600 text-white"
+                    disabled={deleting}
+                  >
+                    Delete Account
+                  </button>
+                  <button
+                    onClick={handleSignOut}
+                    className="px-4 py-2 rounded-md inline-flex items-center justify-center bg-red-600 text-white"
+                    disabled={signingOut}
+                  >
+                    {signingOut ? "Signing out..." : "Sign out"}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {showConfirmModal && (
+        <div className="fixed inset-0 bg-[#000000bc] bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-[350px] space-y-4 text-center">
+            <h3 className="text-lg font-semibold text-red-600">Confirm Deletion</h3>
+            <p className="text-sm text-gray-600">
+              Are you sure you want to permanently delete your account? This action cannot be undone.
+            </p>
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                onClick={() => setShowConfirmModal(false)}
+                className="px-4 py-2 rounded-md border text-gray-700 hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteAccountConfirmed}
+                className="px-4 py-2 rounded-md bg-red-600 text-white"
+                disabled={deleting}
+              >
+                {deleting ? "Deleting..." : "Yes, Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

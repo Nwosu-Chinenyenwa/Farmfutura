@@ -7,13 +7,15 @@ import Footer from "../Components/Footer";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { login } from "@/lib/utils/auth-helpers"; 
+import { login } from "@/lib/utils/auth-helpers";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function page() {
   const [load, setLoad] = useState(false);
   const [message, setmessage] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [isvisible, setisvisible] = useState(false)
   const router = useRouter();
 
   async function handleSubmit(e) {
@@ -22,11 +24,12 @@ export default function page() {
     setmessage("");
 
     try {
-      await login(email, password); 
+      await login(email, password);
       toast.success("Logged in successfully");
       router.push("/Home");
     } catch (err) {
-      const errMsg = err instanceof Error ? err.message : "Invalid email or password";
+      const errMsg =
+        err instanceof Error ? err.message : "Invalid email or password";
       setmessage(errMsg);
       toast.error(errMsg);
     } finally {
@@ -54,7 +57,7 @@ export default function page() {
       <section>
         <div className="py-10 px-2 mt-10 md:flex md:items-center md:justify-center ">
           <form
-            onSubmit={handleSubmit} // <- attached handler here
+            onSubmit={handleSubmit} 
             className="md:shadow-sm  md:px-8 py-8 px-2 md:w-[60vw] xl:w-[40vw]"
           >
             <div className="mb-[30px]">
@@ -119,18 +122,24 @@ export default function page() {
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
               />
-              <input
-                className="border-1 border-[#8080802a] focus:border-1 focus:border-[#209e2e] outline-none w-full p-4 rounded-[5px]"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-              />
-              <span className="flex justify-between">
-                <span className="flex items-center gap-3">
-                  <input type="checkbox" />
-                  <p className="text-[#7a7e9a] font-[400]">Keep Me Login</p>
-                </span>
+              <div className="flex border-1 border-[#8080802a] focus:border-[#209e2e] outline-none w-full p-4 rounded-[5px]">
+                <input
+                  className="focus:border-[#209e2e] outline-none w-full rounded-[5px]"
+                  type={isvisible ? "text" : "password"}
+                  placeholder="Password"
+                  onChange={(e) => setpassword(e.target.value)}
+                  required
+                />
+
+                <button
+                  className="cursor-pointer text-[#595c72]"
+                  type="button"
+                  onClick={() => setisvisible(!isvisible)}
+                >
+                  {isvisible ? <Eye/> : <EyeOff/>}
+                </button>
+              </div>
+              <span className="flex justify-end">
                 <Link href={"/ForgottenPassword"}>
                   <p className="underline text-[#7a7e9a] font-[400] cursor-pointer">
                     Forgot Password?
@@ -138,7 +147,6 @@ export default function page() {
                 </Link>
               </span>
 
-              {/* show loading animation or submit button (unchanged UI) */}
               {load ? (
                 <div className="newtons-cradle">
                   <div className="newtons-cradle__dot"></div>

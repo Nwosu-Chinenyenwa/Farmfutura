@@ -155,6 +155,7 @@ export default function VerifyForm() {
           <input
             id="otp"
             name="otp"
+            className='outline-0 shadow-sm focus:shadow-none focus:border-1 focus:border-[#209e2e]'
             placeholder="Enter 6-digit code"
             maxLength={6}
             {...form.register('otp')}
@@ -165,7 +166,6 @@ export default function VerifyForm() {
               textAlign: 'center',
               letterSpacing: '4px',
               borderRadius: 6,
-              border: '1px solid #ccc',
             }}
           />
           {form.formState.errors.otp && (
@@ -181,7 +181,7 @@ export default function VerifyForm() {
           style={{
             width: '100%',
             padding: '10px',
-            backgroundColor: '#0070f3',
+            backgroundColor: '#209e2e',
             color: '#fff',
             border: 'none',
             borderRadius: 6,
@@ -203,6 +203,7 @@ export default function VerifyForm() {
           textAlign: 'center',
           marginTop: 15,
           fontSize: 14,
+          color: "#7a7e9a"
         }}
       >
         Didn’t receive the code?{' '}
@@ -213,7 +214,7 @@ export default function VerifyForm() {
           style={{
             background: 'none',
             border: 'none',
-            color: '#0070f3',
+            color: '#209e2e',
             textDecoration: 'underline',
             cursor: 'pointer',
             opacity: isLoading ? 0.6 : 1,

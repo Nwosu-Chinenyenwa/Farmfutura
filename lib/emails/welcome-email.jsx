@@ -42,7 +42,6 @@ export const WelcomeEmail = ({
   );
 };
 
-// ✅ Inline styles (JavaScript objects)
 const main = {
   backgroundColor: "#f6f9fc",
   fontFamily:

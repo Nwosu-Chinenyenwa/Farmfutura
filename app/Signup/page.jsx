@@ -7,14 +7,16 @@ import Footer from "../Components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
+import { Eye, EyeOff } from "lucide-react";
 import * as z from "zod";
 
 export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [comfirm, setComfirm] = useState("")
+  const [comfirm, setComfirm] = useState("");
   const [load, setLoad] = useState(false);
+  const [isvisible, setisvisible] = useState(false);
   const router = useRouter();
 
   const signupSchema = z.object({
@@ -59,8 +61,8 @@ export default function page() {
     setMessage("");
     setLoad(true);
 
-    if(comfirm !== password){
-      setLoad(false)
+    if (comfirm !== password) {
+      setLoad(false);
       return;
     }
 
@@ -76,7 +78,9 @@ export default function page() {
     }
 
     try {
+      // ensure any leftover password-reset flag is cleared so verify flow is correct
       sessionStorage.setItem("verificationEmail", email);
+      sessionStorage.removeItem("isPasswordReset");
 
       const resp = await fetch("/api/resend", {
         method: "POST",
@@ -205,13 +209,25 @@ export default function page() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <input
-                className="border-1 border-[#8080802a] focus:border-[#209e2e] outline-none w-full p-4 rounded-[5px]"
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="flex border-1 border-[#8080802a] focus:border-[#209e2e] outline-none w-full p-4 rounded-[5px]">
+                <input
+                  className="focus:border-[#209e2e] outline-none w-full rounded-[5px]"
+                  type={isvisible ? "text" : "password"}
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+
+                <button className="cursor-pointer text-[#595c72]" type="button" onClick={() => setisvisible(!isvisible)}>
+                  {
+                    isvisible ? 
+                    <Eye/>
+                    : 
+                    <EyeOff/>
+                  }
+                </button>
+              </div>
+
               <input
                 className="border-1 border-[#8080802a] focus:border-[#209e2e] outline-none w-full p-4 rounded-[5px]"
                 type="password"
@@ -219,12 +235,6 @@ export default function page() {
                 onChange={(e) => setComfirm(e.target.value)}
                 required
               />
-
-              <span className="flex items-center gap-3">
-                <input type="checkbox" />
-                <p className="text-[#7a7e9a] font-[400]">Keep Me Signed Up</p>
-              </span>
-
               {load ? (
                 <div className="newtons-cradle">
                   <div className="newtons-cradle__dot"></div>
@@ -248,10 +258,6 @@ export default function page() {
                 <p className="text-[#209e2e] ml-1">Login!</p>
               </Link>
             </span>
-
-            {message && (
-              <p className="text-center mt-4 text-[#209e2e]">{message}</p>
-            )}
           </form>
         </div>
       </section>

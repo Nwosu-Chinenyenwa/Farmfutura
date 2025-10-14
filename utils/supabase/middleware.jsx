@@ -37,21 +37,21 @@ export const updateSession = async (request) => {
   const isNewPasswordPage = request.nextUrl.pathname === "/ResetPassword";
 
   // Redirects
-  if (
+   if (
     user &&
     request.nextUrl.pathname.startsWith("/Login") &&
     !isNewPasswordPage
   ) {
     return NextResponse.redirect(new URL("/Home", request.url));
   }
-
+ 
   if (!user && request.nextUrl.pathname.startsWith("/Checkout")) {
     return NextResponse.redirect(new URL("/Login", request.url));
   }
-  
-   if (!user && request.nextUrl.pathname.startsWith("/Profile")) {
+
+  if (!user && request.nextUrl.pathname.startsWith("/Profile")) {
     return NextResponse.redirect(new URL("/Login", request.url));
-  } 
+  }
 
   return supabaseResponse;
 };
